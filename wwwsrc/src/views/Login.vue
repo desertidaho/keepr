@@ -11,13 +11,13 @@
                 <form v-if="loginForm" @submit.prevent="loginUser">
                     <input type="email" v-model="creds.email" placeholder=" Email" class="shadow">
                     <input type="password" v-model="creds.password" placeholder=" Password" class="ml-2 shadow">
-                    <button type="submit" class="btn btn-sm btn-dark ml-2 shadow">Login</button>
+                    <button type="submit" class="btn btn-sm btn-outline-dark ml-2 shadow">Login</button>
                 </form>
                 <form v-else @submit.prevent="register">
                     <input type="text" v-model="newUser.username" placeholder=" Name" class="shadow">
                     <input type="email" v-model="newUser.email" placeholder=" Email" class="ml-2 shadow">
                     <input type="password" v-model="newUser.password" placeholder=" Password" class="ml-2 shadow">
-                    <button type="submit" class="btn btn-sm btn-dark ml-2 shadow">Create Account</button>
+                    <button type="submit" class="btn btn-sm btn-outline-dark ml-2 shadow">Create Account</button>
                 </form>
                 <div @click="loginForm = !loginForm" class="mt-3">
                     <p v-if="loginForm" class="reg text-light">No account? Click to Register.</p>
@@ -80,11 +80,11 @@
         margin-top: 17vh;
         background-color: black;
         color: #ff7300;
-        padding: 0rem 2rem;
+        padding: 0rem 2.4rem;
         padding-top: 1rem;
         padding-bottom: 0.5rem;
-        border-top-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
     }
 
     .eepr {

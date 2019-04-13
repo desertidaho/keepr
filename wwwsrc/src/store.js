@@ -22,11 +22,14 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
-    keeps: [{ name: 'test' }],
+    keeps: [],
   },
   mutations: {
     setUser(state, user) {
       state.user = user
+    },
+    addNewKeep(state, newKeep) {
+      state.keeps.unshift(newKeep)
     }
   },
   actions: {
@@ -72,11 +75,22 @@ export default new Vuex.Store({
         .catch(e => {
           console.log('Logout Failed')
         })
-    }
+    },
 
     //#endregion
 
+    //#region -- KEEP STUFF --
+    newKeep({ commit, dispatch }, newKeep) {
+      api.post('create', newKeep)
+        .then(res => {
+          commit('addNewKeep', newKeep)
+          router.push({ name: 'dashboard' })
+        })
+        .catch(e => {
+          console.log('Failed to create new keep.')
+        })
+    }
 
-
+    //#endregion
   }
 })
