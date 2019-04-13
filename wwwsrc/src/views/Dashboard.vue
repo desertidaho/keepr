@@ -6,6 +6,7 @@
 </template>
 
 <script>
+  import Navbar from '@/components/Navbar.vue'
 
   export default {
     name: "dashboard",
@@ -22,6 +23,16 @@
     },
     methods: {
 
+    },
+    components: {
+      Navbar
     }
   };
 </script>
+
+<style>
+  .dashboard {
+    min-height: 100vh;
+    background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
+  }
+</style>

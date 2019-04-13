@@ -22,7 +22,9 @@
           guest</button>
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="activeUser.active">
-        <button class="btn btn-outline-warning my-2 my-sm-0 out" @click="logout">Log out</button>
+        <button v-if="atHome" class="btn btn-outline-warning my-2 my-sm-0 out" @click="dashboard">Dashboard</button>
+        <button v-if="atDashboard" class="btn btn-outline-warning my-2 my-sm-0 out" @click="home">Home</button>
+        <button class="btn btn-outline-warning my-2 my-sm-0 out ml-4" @click="logout">Log out</button>
       </div>
     </nav>
   </div>
@@ -38,12 +40,16 @@
       if (this.$route.name == 'login') {
         this.atLogin = true
       }
+      if (this.$route.name == 'dashboard') {
+        this.atDashboard = true
+      }
     },
     props: [],
     data() {
       return {
         atHome: false,
-        atLogin: false
+        atLogin: false,
+        atDashboard: false
       };
     },
     computed: {
@@ -62,6 +68,12 @@
         this.$router.push({ name: 'login' })
       },
       browse() {
+        this.$router.push({ name: 'home' })
+      },
+      dashboard() {
+        this.$router.push({ name: 'dashboard' })
+      },
+      home() {
         this.$router.push({ name: 'home' })
       }
     },
