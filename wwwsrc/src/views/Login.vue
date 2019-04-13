@@ -2,6 +2,11 @@
     <div class="login">
         <navbar />
         <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <h1 class="name"><img src="@/assets/k.jpg" alt="K logo" class="k"><span class="eepr">eepr</span></h1>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 main">
                 <form v-if="loginForm" @submit.prevent="loginUser">
                     <input type="email" v-model="creds.email" placeholder=" Email" class="shadow">
@@ -65,8 +70,29 @@
         background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
     }
 
+    .k {
+        height: 3rem;
+        width: 3rem;
+        margin-bottom: 1rem !important;
+    }
+
+    .name {
+        margin-top: 17vh;
+        background-color: black;
+        color: #ff7300;
+        padding: 0rem 2rem;
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .eepr {
+        margin-left: -0.3rem;
+    }
+
     .main {
-        margin-top: 30vh;
+        margin-top: 10vh;
     }
 
     .reg {

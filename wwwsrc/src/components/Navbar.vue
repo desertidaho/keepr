@@ -14,17 +14,17 @@
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="!activeUser.active && !atLogin">
         <button class="btn btn-outline-warning my-2 my-sm-0 in" type="submit" v-if="" @click="signIn">Sign In</button>
-        <button class="btn btn-outline-warning my-2 my-sm-0 ml-4 in" type="submit" v-if=""
+        <button class="btn btn-outline-warning my-2 my-sm-0 ml-2 in" type="submit" v-if=""
           @click="signIn">Register</button>
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="!activeUser.active && !atHome">
-        <button class="btn btn-outline-warning my-2 my-sm-0 sr" @click="browse">Browse as
+        <button class="btn btn-outline-warning my-2 my-sm-0 browse" @click="browse">Browse as
           guest</button>
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="activeUser.active">
         <button v-if="atHome" class="btn btn-outline-warning my-2 my-sm-0 out" @click="dashboard">Dashboard</button>
         <button v-if="atDashboard" class="btn btn-outline-warning my-2 my-sm-0 out" @click="home">Home</button>
-        <button class="btn btn-outline-warning my-2 my-sm-0 out ml-4" @click="logout">Log out</button>
+        <button class="btn btn-outline-warning my-2 my-sm-0 out ml-2" @click="logout">Log out</button>
       </div>
     </nav>
   </div>
@@ -104,6 +104,7 @@
     font-weight: 500;
   }
 
+  .browse,
   .in,
   .out,
   .search {
