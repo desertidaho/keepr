@@ -5,17 +5,17 @@
                 <form v-if="loginForm" @submit.prevent="loginUser">
                     <input type="email" v-model="creds.email" placeholder=" Email" class="shadow">
                     <input type="password" v-model="creds.password" placeholder=" Password" class="ml-2 shadow">
-                    <button type="submit" class="btn btn-sm btn-light ml-2 shadow">Login</button>
+                    <button type="submit" class="btn btn-sm btn-dark ml-2 shadow">Login</button>
                 </form>
                 <form v-else @submit.prevent="register">
                     <input type="text" v-model="newUser.username" placeholder=" Name" class="shadow">
                     <input type="email" v-model="newUser.email" placeholder=" Email" class="ml-2 shadow">
                     <input type="password" v-model="newUser.password" placeholder=" Password" class="ml-2 shadow">
-                    <button type="submit" class="btn btn-sm btn-light ml-2 shadow">Create Account</button>
+                    <button type="submit" class="btn btn-sm btn-dark ml-2 shadow">Create Account</button>
                 </form>
                 <div @click="loginForm = !loginForm" class="mt-3">
                     <p v-if="loginForm" class="reg text-light">No account? Click to Register.</p>
-                    <p v-else class="text-light">Already have an account click to Login</p>
+                    <p v-else class="text-light reg">Already have an account click to Login</p>
                 </div>
             </div>
         </div>

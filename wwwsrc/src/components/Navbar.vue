@@ -12,52 +12,63 @@
           <button class="btn btn-outline-warning my-2 my-sm-0 search" type="submit">Search</button>
         </form>
       </div>
-      <div class="col-3 d-flex justify-content-end">
+      <div class="col-3 d-flex justify-content-end" v-if="!activeUser.active">
         <button class="btn btn-outline-warning my-2 my-sm-0 sr" type="submit">Sign In</button>
         <button class="btn btn-outline-warning my-2 my-sm-0 ml-4 sr" type="submit">Register</button>
+      </div>
+      <div class="col-3 d-flex justify-content-end" v-if="activeUser.active">
+        <button class="btn btn-outline-warning my-2 my-sm-0 sr" @click="logout">Log out</button>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
-export default {
-  name: "Navbar",
-  props: [],
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {},
-  components: {}
-};
+  export default {
+    name: "Navbar",
+    props: [],
+    data() {
+      return {};
+    },
+    computed: {
+      activeUser() {
+        return this.$store.state.user
+      },
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch('logout')
+      }
+    },
+    components: {}
+  };
 </script>
 
 <style scoped>
-nav {
-  width: 100vw;
-}
+  nav {
+    width: 100vw;
+  }
 
-.navbar {
-  background-color: black;
-}
+  .navbar {
+    background-color: black;
+  }
 
-.logo {
-  height: 3rem;
-  width: 3rem;
-}
+  .logo {
+    height: 3rem;
+    width: 3rem;
+  }
 
-.form-control {
-  width: 30vw;
-}
+  .form-control {
+    width: 30vw;
+  }
 
-input[type="text"].form-control::-webkit-input-placeholder {
-  color: #ff7300;
-  font-weight: 500;
-}
+  input[type="text"].form-control::-webkit-input-placeholder {
+    color: #ff7300;
+    font-weight: 500;
+  }
 
-.sr,
-.search {
-  color: #ff7300;
-}
+  .sr,
+  .search {
+    color: #ff7300;
+  }
 </style>
