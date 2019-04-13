@@ -94,7 +94,10 @@
           description: "",
           img: "",
           isPrivate: false,
-          userId: ""
+          userId: "",
+          keeps: 0,
+          shares: 0,
+          views: 0
         }
 
       };
@@ -109,7 +112,7 @@
     },
     methods: {
       newKeepPost() {
-        // this.newKeep.userId = this.activeUser.id
+        this.newKeep.userId = this.activeUser.id
         let newK = this.newKeep
 
         this.$store.dispatch('newKeep', newK)

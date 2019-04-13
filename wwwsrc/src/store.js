@@ -81,13 +81,15 @@ export default new Vuex.Store({
 
     //#region -- KEEP STUFF --
     newKeep({ commit, dispatch }, newKeep) {
-      api.post('create', newKeep)
+      api.post('Keep', newKeep)
         .then(res => {
-          commit('addNewKeep', newKeep)
+          console.log(res)
+          commit('addNewKeep', res.data)
           router.push({ name: 'dashboard' })
         })
         .catch(e => {
-          console.log('Failed to create new keep.')
+          console.log(e)
+          // console.log('Failed to create new keep.')
         })
     }
 
