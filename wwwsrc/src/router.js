@@ -13,13 +13,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'login',
+      props: true,
+      component: Login
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: '/home',
+      name: 'home',
+      props: true,
+      component: Home
     },
     {
       path: '/dashboard',

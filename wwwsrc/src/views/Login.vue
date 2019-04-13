@@ -1,5 +1,6 @@
 <template>
     <div class="login">
+        <navbar />
         <div class="row">
             <div class="col-12 main">
                 <form v-if="loginForm" @submit.prevent="loginUser">
@@ -15,7 +16,7 @@
                 </form>
                 <div @click="loginForm = !loginForm" class="mt-3">
                     <p v-if="loginForm" class="reg text-light">No account? Click to Register.</p>
-                    <p v-else class="text-light reg">Already have an account click to Login</p>
+                    <p v-else class="text-light reg">Already have an account? Click to Login</p>
                 </div>
             </div>
         </div>
@@ -23,11 +24,11 @@
 </template>
 
 <script>
+    import Navbar from '@/components/Navbar.vue'
 
     export default {
         name: "login",
         mounted() {
-            //checks for valid session
             this.$store.dispatch("authenticate");
         },
         data() {
@@ -51,6 +52,9 @@
             loginUser() {
                 this.$store.dispatch("login", this.creds);
             }
+        },
+        components: {
+            Navbar
         }
     };
 </script>

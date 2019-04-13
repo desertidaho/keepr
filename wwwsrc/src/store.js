@@ -21,7 +21,8 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    keeps: [{ name: 'test' }],
   },
   mutations: {
     setUser(state, user) {
