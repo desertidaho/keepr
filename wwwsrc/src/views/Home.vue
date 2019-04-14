@@ -1,20 +1,25 @@
 <template>
   <div class="home">
     <navbar />
-    <div class="row mt-4">
-      <!-- keep cards -->
-      <div class="col-12" v-for="keep in keeps">
-        <div class="card d-flex flex-row mb-3 shadow">
-          <img class="card-img-side" :src="keep.img" alt="Card image cap">
-          <div class="card-body text-left">
-            <h6 class="card-title">{{keep.name}}</h6>
-            <p class="card-text">
-              {{keep.description}}
-            </p>
-            <p class="card-text">
-              {{keep.isPrivate}}
-            </p>
-            <a href="#!" class="btn btn-sm btn-dark shadow">Add To Vault</a>
+    <div class="container-fluid">
+      <div class="row mt-4">
+        <!-- keep cards -->
+        <div class="col-2" v-for="keep in keeps">
+          <div class="card mb-3 shadow">
+            <img class="card-img-top" :src="keep.img" alt="Card image cap">
+            <div class="card-body text-left">
+              <h6 class="card-title">{{keep.name}}</h6>
+              <p class="card-text">
+                {{keep.description}}
+              </p>
+              <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
+              <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
+              <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
+              <div class="text-center">
+                <button v-if="activeUser.id" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
+                  Vault</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,9 +54,65 @@
   };
 </script>
 
-<style>
+<style scoped>
   .home {
     min-height: 100vh;
     background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
+  }
+
+  .card {
+    border: 4px solid white;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .card-img-top {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 18px;
+    max-height: 9rem;
+    min-height: 9rem;
+    object-fit: cover;
+  }
+
+  .card-body {
+    background-image: linear-gradient(to bottom, rgb(224, 223, 223), white);
+    border-top-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .card-text {
+    font-size: 0.7rem;
+  }
+
+  .fa-eye {
+    color: rgb(65, 32, 32);
+  }
+
+  .fa-share {
+    color: blue;
+  }
+
+  .fa-file-download {
+    color: green;
+    margin-left: 0.15rem;
+  }
+
+  .num-shares {
+    margin-left: 1.1rem;
+  }
+
+  .num-keeps {
+    margin-left: 1.21rem;
+  }
+
+  .trash {
+    margin-left: 0.1rem;
+  }
+
+  .add-to-vault {
+    position: absolute;
+    bottom: 10px;
+    font-size: 0.6rem;
   }
 </style>

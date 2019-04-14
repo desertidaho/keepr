@@ -83,8 +83,8 @@
         padding: 0rem 2.4rem;
         padding-top: 1rem;
         padding-bottom: 0.5rem;
-        border-top-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
     }
 
     .eepr {

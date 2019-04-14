@@ -24,7 +24,7 @@
               <a href="" @click="deleteKeep(keep.id)"><i class="fas fa-trash text-danger mt-2 trash"></i></a>
               <div class="text-center">
 
-                <a href="#!" class="btn btn-sm btn-secondary shadow add-to-vault">Add To Vault</a>
+                <a href="#!" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To Vault</a>
               </div>
             </div>
           </div>
@@ -95,21 +95,11 @@
             <form>
               <div class="form-group">
                 <input v-model="newKeep.name" type="text" class="form-control" id="formGroupExampleInput"
-                  placeholder="Name of new Keep...">
+                  placeholder="Name of new Vault...">
               </div>
               <div class="form-group">
                 <input v-model="newKeep.description" type="text" class="form-control" id="formGroupExampleInput2"
                   placeholder="Description...">
-              </div>
-              <div class="form-group">
-                <input v-model="newKeep.img" type="text" class="form-control" id="formGroupExampleInput"
-                  placeholder="Image UrL...">
-              </div>
-              <div class="form-group d-flex justify-content-start ml-4">
-                <input v-model="newKeep.isPrivate" class="form-check-input" type="checkbox" value="" id="isPrivate">
-                <label class="form-check-label" for="isPrivate">
-                  Private (If checked only you can see.)
-                </label>
               </div>
             </form>
           </div>
@@ -189,7 +179,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   .dashboard {
     min-height: 100vh;
     background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
@@ -197,8 +187,9 @@
 
   .card,
   .modal-content {
-    border: 5px solid white;
-    border-radius: 10px;
+    border: 4px solid white;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   .card-body {
@@ -208,13 +199,11 @@
   }
 
   .card-img-side {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 18px;
     max-width: 60%;
     min-width: 60%;
     object-fit: cover;
-    /* min-height: 100%;
-    max-height: 100%; */
   }
 
   .card-text {
@@ -249,6 +238,7 @@
   .add-to-vault {
     position: absolute;
     bottom: 10px;
+    font-size: 0.7rem;
   }
 
   .mhk,
@@ -267,5 +257,13 @@
 
   .mbv {
     background-image: linear-gradient(#ffc400 30%, #ff7300);
+  }
+
+  .modal-header {
+    border-top-right-radius: 18px;
+  }
+
+  .modal-footer {
+    border-bottom-left-radius: 18px;
   }
 </style>
