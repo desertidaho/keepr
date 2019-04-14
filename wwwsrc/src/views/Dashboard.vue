@@ -84,16 +84,15 @@
 
   export default {
     name: "dashboard",
-    beforemounted() {
-
+    beforeMount() {
+      this.getMyKeeps()
     },
     mounted() {
       //blocks users not logged in
       if (!this.$store.state.user.id) {
         this.$router.push({ name: "login" });
       }
-      let userId = this.$store.state.activeUser.userId
-      this.$store.dispatch('getMyKeeps', userId)
+
     },
     data() {
       return {
@@ -128,6 +127,10 @@
         // this.newKeep.description = ''
         // this.newKeep.img = ''
         // this.newKeep.isPrivate = false
+      },
+      getMyKeeps() {
+        let userId = this.activeUser.id
+        this.$store.dispatch('getMyKeeps', userId)
       }
     },
     components: {

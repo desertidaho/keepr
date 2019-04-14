@@ -22,7 +22,7 @@ namespace keepr.Repositories
 
     public IEnumerable<Keep> GetById(string userId)
     {
-      return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @UserId");
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @UserId", new { userId });
     }
 
     public Keep CreateKeep(Keep keep)

@@ -20,15 +20,6 @@ namespace Keepr.Controllers
       _kr = kr;
     }
 
-    //GETBYUSERID for dashboard
-    [HttpGet("{userId}")]
-    public ActionResult<Keep> Get(string userId)
-    {
-      IEnumerable<Keep> found = _kr.GetById(userId);
-      if (found == null) { return BadRequest(); }
-      return Ok(found);
-    }
-
     //GETALL
     [HttpGet]
     public ActionResult<IEnumerable<Keep>> Get()
@@ -36,6 +27,15 @@ namespace Keepr.Controllers
       IEnumerable<Keep> results = _kr.GetALL();
       if (results == null) { return BadRequest(); }
       return Ok(results);
+    }
+
+    //GETBYUSERID for dashboard
+    [HttpGet("{userId}")]
+    public ActionResult<Keep> Get(string userId)
+    {
+      IEnumerable<Keep> found = _kr.GetById(userId);
+      if (found == null) { return BadRequest(); }
+      return Ok(found);
     }
 
 

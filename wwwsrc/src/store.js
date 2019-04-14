@@ -99,8 +99,7 @@ export default new Vuex.Store({
 
     //get all private/public keeps for a user dashboard
     getMyKeeps({ commit, dispatch }, userId) {
-      debugger
-      api.get(`Keep/${userId}`)
+      api.get(`Keep/${userId}`, userId)
         .then(res => {
           console.log(res)
           commit('getAllKeeps', res.data)
