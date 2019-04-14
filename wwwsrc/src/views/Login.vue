@@ -73,7 +73,7 @@
     .k {
         height: 3rem;
         width: 3rem;
-        margin-bottom: 1rem !important;
+        margin-bottom: 0.8rem !important;
     }
 
     .name {
@@ -97,5 +97,9 @@
 
     .reg {
         cursor: pointer;
+    }
+
+    input {
+        width: 15vw;
     }
 </style>

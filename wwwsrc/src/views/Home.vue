@@ -9,7 +9,7 @@
             <a @click="setViewKeep(keep.id)"><img data-toggle="modal" data-target="#view-keep" class="card-img-top"
                 :src="keep.img" alt="Card image cap"></a>
             <div class="card-body text-left px-3">
-              <h5 class="card-title">{{keep.name}}</h5>
+              <h6 class="card-title">{{keep.name}}</h6>
               <p class="card-text">
                 {{keep.description}}
               </p>
@@ -155,7 +155,7 @@
   }
 
   .card-text {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .fa-eye {
@@ -186,7 +186,7 @@
   .add-to-vault {
     position: absolute;
     bottom: 10px;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 
   .modal-content {
@@ -198,10 +198,11 @@
   .modal-header {
     background-color: #ff7300;
     border-top-right-radius: 18px;
+    color: black;
   }
 
   .view-keep-desc {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .view-keep-img {

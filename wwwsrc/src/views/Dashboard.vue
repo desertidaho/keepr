@@ -12,7 +12,7 @@
           <div class="card d-flex flex-row mb-3 shadow">
             <img class="card-img-side" :src="keep.img" alt="Card image cap">
             <div class="card-body text-left">
-              <h5 class="card-title">{{keep.name}}</h5>
+              <h6 class="card-title">{{keep.name}}</h6>
               <p class="card-text">
                 {{keep.description}}
               </p>
@@ -39,7 +39,7 @@
           <div class="card d-flex flex-row mb-3 shadow">
             <div class="card-body text-left cbv">
               <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-danger mt-2 trash-v"></i></a>
-              <h5 class="card-title">{{vault.name}}</h5>
+              <h6 class="card-title">{{vault.name}}</h6>
               <p class="card-text">
                 {{vault.description}}</p>
             </div>
@@ -72,9 +72,10 @@
                 <input v-model="newKeep.img" type="text" class="form-control" id="formGroupExampleInput"
                   placeholder="Image UrL...">
               </div>
-              <div class="form-group d-flex justify-content-start ml-4">
-                <input v-model="newKeep.isPrivate" class="form-check-input" type="checkbox" value="" id="isPrivate">
-                <label class="form-check-label" for="isPrivate">
+              <div class="form-group d-flex justify-content-start">
+                <input v-model="newKeep.isPrivate" class="form-check-input mt-2" type="checkbox" value=""
+                  id="isPrivate">
+                <label class="form-check-label ml-4" for="isPrivate">
                   Private (If checked only you can see.)
                 </label>
               </div>
@@ -234,7 +235,7 @@
   }
 
   .card-text {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .fa-eye {
@@ -269,7 +270,7 @@
   .add-to-vault {
     position: absolute;
     bottom: 10px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .mhk,
@@ -296,5 +297,9 @@
 
   .modal-footer {
     border-bottom-left-radius: 18px;
+  }
+
+  .form-check-input {
+    margin-left: -5.9rem;
   }
 </style>

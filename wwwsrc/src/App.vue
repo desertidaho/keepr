@@ -26,7 +26,7 @@
 <style>
   #app {
     /* font-family: "Avenir", Helvetica, Arial, sans-serif; */
-    font-family: 'Cuprum', sans-serif;
+    font-family: 'Noto Serif', serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
