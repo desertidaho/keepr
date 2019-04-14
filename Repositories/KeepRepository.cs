@@ -17,12 +17,12 @@ namespace keepr.Repositories
 
     public IEnumerable<Keep> GetALL()
     {
-      return _db.Query<Keep>("SELECT * FROM keep");
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate = 'false'");
     }
 
-    public Keep GetById(int Id)
+    public IEnumerable<Keep> GetById(string userId)
     {
-      return _db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @Id", new { Id });
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @UserId");
     }
 
     public Keep CreateKeep(Keep keep)

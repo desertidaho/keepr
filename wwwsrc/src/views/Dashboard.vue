@@ -19,7 +19,10 @@
               <p class="card-text">
                 {{keep.description}}
               </p>
-              <a href="#!" class="btn btn-primary">Yaaa</a>
+              <p class="card-text">
+                {{keep.isPrivate}}
+              </p>
+              <a href="#!" class="btn btn-sm btn-dark shadow">Add To Vault</a>
             </div>
           </div>
         </div>
@@ -81,11 +84,16 @@
 
   export default {
     name: "dashboard",
+    beforemounted() {
+
+    },
     mounted() {
       //blocks users not logged in
       if (!this.$store.state.user.id) {
         this.$router.push({ name: "login" });
       }
+      let userId = this.$store.state.activeUser.userId
+      this.$store.dispatch('getMyKeeps', userId)
     },
     data() {
       return {

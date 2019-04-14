@@ -30,6 +30,9 @@ export default new Vuex.Store({
     },
     addNewKeep(state, newKeep) {
       state.keeps.unshift(newKeep)
+    },
+    getAllKeeps(state, data) {
+      state.keeps = data
     }
   },
   actions: {
@@ -80,6 +83,35 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- KEEP STUFF --
+
+    //get all public keeps for home view
+    getKeeps({ commit, dispatch }) {
+      api.get('Keep')
+        .then(res => {
+          console.log(res)
+          commit('getAllKeeps', res.data)
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Failed to create new keep.')
+        })
+    },
+
+    //get all private/public keeps for a user dashboard
+    getMyKeeps({ commit, dispatch }, userId) {
+      debugger
+      api.get(`Keep/${userId}`)
+        .then(res => {
+          console.log(res)
+          commit('getAllKeeps', res.data)
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Failed to create new keep.')
+        })
+    },
+
+    //create a new keep
     newKeep({ commit, dispatch }, newKeep) {
       api.post('Keep', newKeep)
         .then(res => {
@@ -89,7 +121,7 @@ export default new Vuex.Store({
         })
         .catch(e => {
           console.log(e)
-          // console.log('Failed to create new keep.')
+          console.log('Failed to create new keep.')
         })
     }
 
