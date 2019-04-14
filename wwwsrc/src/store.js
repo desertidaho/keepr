@@ -100,7 +100,6 @@ export default new Vuex.Store({
     getKeeps({ commit, dispatch }) {
       api.get('Keep')
         .then(res => {
-          console.log(res)
           commit('getAllKeeps', res.data)
         })
         .catch(e => {
@@ -113,7 +112,6 @@ export default new Vuex.Store({
     getMyKeeps({ commit, dispatch }, userId) {
       api.get(`Keep/${userId}`, userId)
         .then(res => {
-          console.log(res)
           commit('getAllKeeps', res.data)
         })
         .catch(e => {
@@ -136,6 +134,19 @@ export default new Vuex.Store({
         })
     },
 
+    //edit a keep by incrementing number of views
+    updateViews({ commit, dispatch }, editedKeep) {
+      let id = editedKeep.id
+      api.put(`Keep/${id}`, editedKeep)
+        .then(res => {
+          dispatch('getKeeps')
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Failed to edit keep.')
+        })
+    },
+
     //delete a keep from user dashboard
     deleteKeep({ commit, dispatch }, id) {
       api.delete(`Keep/${id}`, id)
@@ -153,7 +164,7 @@ export default new Vuex.Store({
 
     //#region -- VAULTS --
 
-    //get all private/public keeps for a user dashboard
+    //get all private/public vaults for a user dashboard
     getMyVaults({ commit, dispatch }, userId) {
       api.get(`Vault/${userId}`, userId)
         .then(res => {
@@ -166,7 +177,7 @@ export default new Vuex.Store({
         })
     },
 
-    //create a new keep
+    //create a new vault
     newVault({ commit, dispatch }, newVault) {
       api.post('Vault', newVault)
         .then(res => {
@@ -180,7 +191,7 @@ export default new Vuex.Store({
         })
     },
 
-    //delete a keep from user dashboard
+    //delete a vault from user dashboard
     deleteVault({ commit, dispatch }, id) {
       api.delete(`Vault/${id}`, id)
         .then(res => {

@@ -95,6 +95,7 @@
           views: '',
           shares: '',
           keeps: ''
+
         }
 
       };
@@ -116,9 +117,13 @@
         this.viewKeep.name = keep.name
         this.viewKeep.description = keep.description
         this.viewKeep.img = keep.img
-        this.viewKeep.views = keep.views
+        this.viewKeep.views = keep.views++
         this.viewKeep.shares = keep.shares
         this.viewKeep.keeps = keep.keeps
+        this.updateViews(keep)
+      },
+      updateViews(keep) {
+        this.$store.dispatch('updateViews', keep)
       }
     },
     components: {

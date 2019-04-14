@@ -38,7 +38,6 @@ namespace Keepr.Controllers
       return Ok(found);
     }
 
-
     //CREATE
     [HttpPost]
     public ActionResult<Keep> Create([FromBody] Keep keep)
@@ -46,6 +45,15 @@ namespace Keepr.Controllers
       Keep newKeep = _kr.CreateKeep(keep);
       if (newKeep == null) { return BadRequest("Something went wrong."); }
       return Ok(newKeep);
+    }
+
+    //EDIT
+    [HttpPut("{id}")]
+    public ActionResult<Keep> Edit(int id, [FromBody] Keep editedKeep)
+    {
+      Keep updatedKeep = _kr.EditKeep(id, editedKeep);
+      if (updatedKeep == null) { return BadRequest("Unable to update keep."); }
+      return Ok(updatedKeep);
     }
 
     //DELETE
