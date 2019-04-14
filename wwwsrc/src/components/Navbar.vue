@@ -6,8 +6,8 @@
           <router-link class="" to="/home"><img src="@/assets/k.jpg" alt="K logo" class="logo">
           </router-link>
         </a>
-        <p v-if="atDashboard" class="text-light username">{{activeUser.username}}'s
-          Dashboard</p>
+        <h6 v-if="atDashboard" class="text-light username">{{activeUser.username}}'s
+          Dashboard</h6>
       </div>
       <div class="col-6 d-flex justify-content-center" v-if="!atLogin">
         <form class="form-inline" @submit.prevent="search(searchQuery)">
@@ -133,7 +133,7 @@
   }
 
   .username {
-    margin-top: 1.22rem;
+    margin-top: 1.26rem;
     margin-bottom: 0;
     padding-bottom: 0;
   }

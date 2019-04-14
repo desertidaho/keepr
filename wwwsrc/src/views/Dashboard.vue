@@ -12,7 +12,7 @@
           <div class="card d-flex flex-row mb-3 shadow">
             <img class="card-img-side" :src="keep.img" alt="Card image cap">
             <div class="card-body text-left">
-              <h6 class="card-title">{{keep.name}}</h6>
+              <h5 class="card-title">{{keep.name}}</h5>
               <p class="card-text">
                 {{keep.description}}
               </p>
@@ -21,7 +21,7 @@
               <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
               <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
               <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
-              <a href="" @click="deleteKeep(keep.id)"><i class="fas fa-trash text-danger mt-2 trash"></i></a>
+              <a href="" @click="deleteKeep(keep.id)"><i class="fas fa-trash text-danger mt-2 trash-k"></i></a>
               <div class="text-center">
                 <a href="#!" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To Vault</a>
               </div>
@@ -38,10 +38,10 @@
         <div class="col-12" v-for="vault in vaults">
           <div class="card d-flex flex-row mb-3 shadow">
             <div class="card-body text-left cbv">
-              <h6 class="card-title">{{vault.name}}</h6>
+              <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-danger mt-2 trash-v"></i></a>
+              <h5 class="card-title">{{vault.name}}</h5>
               <p class="card-text">
                 {{vault.description}}</p>
-              <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-danger mt-2 trash"></i></a>
             </div>
           </div>
         </div>
@@ -234,7 +234,7 @@
   }
 
   .card-text {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   .fa-eye {
@@ -258,14 +258,18 @@
     margin-left: 1.21rem;
   }
 
-  .trash {
+  .trash-k {
     margin-left: 0.1rem;
+  }
+
+  .trash-v {
+    float: right;
   }
 
   .add-to-vault {
     position: absolute;
     bottom: 10px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   .mhk,

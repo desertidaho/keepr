@@ -8,8 +8,8 @@
           <div class="card mb-3 shadow">
             <a @click="setViewKeep(keep.id)"><img data-toggle="modal" data-target="#view-keep" class="card-img-top"
                 :src="keep.img" alt="Card image cap"></a>
-            <div class="card-body text-left">
-              <h6 class="card-title">{{keep.name}}</h6>
+            <div class="card-body text-left px-3">
+              <h5 class="card-title">{{keep.name}}</h5>
               <p class="card-text">
                 {{keep.description}}
               </p>
@@ -36,32 +36,38 @@
               <i class="fas fa-share"></i><span class="num-shares">{{search.shares}}</span><br>
               <i class="fas fa-file-download"></i><span class="num-keeps">{{search.keeps}}</span><br>
               <div class="text-center">
-                <button v-if="activeUser.id" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
+                <button v-if="activeUser.id" @click="addToVault(viewKeep.id)"
+                  class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
                   Vault</button>
               </div>
             </div>
           </div>
         </div>
-        <!-- Create Vault modal -->
-        <div class="modal fade" id="view-keep" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
-          aria-hidden="true">
+        <!-- view keep modal -->
+        <div class="modal fade" id="view-keep" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title text-light" id="exampleModal3Label">Make a Vault</h5>
+                <h4 class="card-title">{{viewKeep.name}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div class="modal-body mbv">
-                <img class="card-img-top" :src="viewKeep.img" alt="Card image cap">
-                <h6 class="card-title">{{viewKeep.name}}</h6>
-                <p class="card-text">
+                <p class="card-text ml-3 view-keep-desc">
                   {{viewKeep.description}}
                 </p>
+                <img class="card-img-top view-keep-img" :src="viewKeep.img" alt="Card image cap">
               </div>
-              <div class="modal-footer mfv">
-
+              <div class="modal-footer mfv d-flex justify-content-center">
+                <i class="far fa-eye"></i><span class="ml-2">{{viewKeep.views}}</span>
+                <i class="fas fa-share ml-5"></i><span class="num-shares ml-2">{{viewKeep.shares}}</span>
+                <i class="fas fa-file-download ml-5"></i><span class="num-keeps ml-2">{{viewKeep.keeps}}</span>
+                <div class="py-4">
+                  <button v-if="activeUser.id" @click="addToVault(viewKeep.id)"
+                    class="btn btn-sm btn-secondary shadow add-to-vault ml-5 mb-3">Add To
+                    Vault</button>
+                </div>
               </div>
             </div>
           </div>
@@ -149,7 +155,7 @@
   }
 
   .card-text {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   .fa-eye {
@@ -180,6 +186,32 @@
   .add-to-vault {
     position: absolute;
     bottom: 10px;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .modal-content {
+    border-bottom-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border: 4px solid white;
+  }
+
+  .modal-header {
+    background-color: #ff7300;
+    border-top-right-radius: 18px;
+  }
+
+  .view-keep-desc {
+    font-size: 1rem;
+  }
+
+  .view-keep-img {
+    max-height: 15rem;
+    min-height: 15rem;
+    object-fit: contain;
+  }
+
+  .modal-footer {
+    background-color: #ffc400;
+    border-bottom-left-radius: 18px;
   }
 </style>
