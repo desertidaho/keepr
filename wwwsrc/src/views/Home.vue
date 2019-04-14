@@ -6,7 +6,8 @@
         <!-- keep cards -->
         <div v-if="searched.length == 0" class="col-2" v-for="keep in keeps">
           <div class="card mb-3 shadow">
-            <img class="card-img-top" :src="keep.img" alt="Card image cap">
+            <a @click="setViewKeep(keep.id)"><img data-toggle="modal" data-target="#view-keep" class="card-img-top"
+                :src="keep.img" alt="Card image cap"></a>
             <div class="card-body text-left">
               <h6 class="card-title">{{keep.name}}</h6>
               <p class="card-text">
@@ -41,6 +42,31 @@
             </div>
           </div>
         </div>
+        <!-- Create Vault modal -->
+        <div class="modal fade" id="view-keep" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-light" id="exampleModal3Label">Make a Vault</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body mbv">
+                <img class="card-img-top" :src="viewKeep.img" alt="Card image cap">
+                <h6 class="card-title">{{viewKeep.name}}</h6>
+                <p class="card-text">
+                  {{viewKeep.description}}
+                </p>
+              </div>
+              <div class="modal-footer mfv">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -48,7 +74,6 @@
 
 <script>
   import Navbar from '@/components/Navbar.vue'
-
   export default {
     name: "home",
     mounted() {
@@ -56,6 +81,15 @@
     },
     data() {
       return {
+        showModal: false,
+        viewKeep: {
+          name: '',
+          description: '',
+          img: '',
+          views: '',
+          shares: '',
+          keeps: ''
+        }
 
       };
     },
@@ -68,6 +102,17 @@
       },
       searched() {
         return this.$store.state.search
+      }
+    },
+    methods: {
+      setViewKeep(id) {
+        let keep = this.keeps.find(k => k.id == id);
+        this.viewKeep.name = keep.name
+        this.viewKeep.description = keep.description
+        this.viewKeep.img = keep.img
+        this.viewKeep.views = keep.views
+        this.viewKeep.shares = keep.shares
+        this.viewKeep.keeps = keep.keeps
       }
     },
     components: {
@@ -93,6 +138,7 @@
     max-height: 9rem;
     min-height: 9rem;
     object-fit: cover;
+    cursor: pointer;
   }
 
   .card-body {

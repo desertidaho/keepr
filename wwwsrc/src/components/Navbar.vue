@@ -1,11 +1,13 @@
 <template>
   <div class="row mx-0 px-0">
     <nav class="navbar navbar-light">
-      <div class="col-3 d-flex justify-content-start">
+      <div class="col-3 d-flex justify-content-between">
         <a class="navbar-brand" href="#!">
           <router-link class="" to="/home"><img src="@/assets/k.jpg" alt="K logo" class="logo">
           </router-link>
         </a>
+        <p v-if="atDashboard" class="text-light username">{{activeUser.username}}'s
+          Dashboard</p>
       </div>
       <div class="col-6 d-flex justify-content-center" v-if="!atLogin">
         <form class="form-inline" @submit.prevent="search(searchQuery)">
@@ -128,6 +130,12 @@
   .logo {
     height: 3rem;
     width: 3rem;
+  }
+
+  .username {
+    margin-top: 1.22rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
 
   .form-control {

@@ -23,14 +23,12 @@
               <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
               <a href="" @click="deleteKeep(keep.id)"><i class="fas fa-trash text-danger mt-2 trash"></i></a>
               <div class="text-center">
-
                 <a href="#!" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To Vault</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <div class="col-7">
         <div class="col-12 mt-3">
           <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-vault">Create
@@ -39,7 +37,7 @@
         <!-- vault cards -->
         <div class="col-12" v-for="vault in vaults">
           <div class="card d-flex flex-row mb-3 shadow">
-            <div class="card-body text-left">
+            <div class="card-body text-left cbv">
               <h6 class="card-title">{{vault.name}}</h6>
               <p class="card-text">
                 {{vault.description}}</p>
@@ -47,7 +45,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <!-- Create Keep modal -->
@@ -122,7 +119,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -159,7 +155,6 @@
           description: "",
           userId: "",
         }
-
       };
     },
     computed: {
@@ -211,7 +206,6 @@
 <style scoped>
   .dashboard {
     min-height: 100vh;
-    /* background-image: linear-gradient(to right, #ff7300 30%, #ffc400); */
   }
 
   .card,
@@ -225,6 +219,9 @@
     background-image: linear-gradient(to right, rgb(235, 232, 232) 2%, white);
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+  }
+
+  .cbv {
     border-bottom-left-radius: 18px;
   }
 
