@@ -23,7 +23,8 @@ export default new Vuex.Store({
   state: {
     user: {},
     keeps: [],
-    search: []
+    search: [],
+    vaults: []
   },
   mutations: {
     setUser(state, user) {
@@ -37,11 +38,18 @@ export default new Vuex.Store({
     },
     searchFor(state, searchArr) {
       state.search = searchArr
-    }
+    },
+    addNewVault(state, newVault) {
+      state.vaults.unshift(newVault)
+    },
+    getAllVaults(state, data) {
+      state.vaults = data
+    },
   },
   actions: {
 
     //#region -- AUTH STUFF --
+
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
         .then(res => {
@@ -86,7 +94,7 @@ export default new Vuex.Store({
 
     //#endregion
 
-    //#region -- KEEP STUFF --
+    //#region -- KEEPS --
 
     //get all public keeps for home view
     getKeeps({ commit, dispatch }) {
@@ -97,7 +105,7 @@ export default new Vuex.Store({
         })
         .catch(e => {
           console.log(e)
-          console.log('Failed to create new keep.')
+          console.log('Failed to get keeps.')
         })
     },
 
@@ -110,7 +118,7 @@ export default new Vuex.Store({
         })
         .catch(e => {
           console.log(e)
-          console.log('Failed to create new keep.')
+          console.log('Failed to get keeps for a user.')
         })
     },
 
@@ -143,10 +151,50 @@ export default new Vuex.Store({
 
     //#endregion
 
+    //#region -- VAULTS --
+
+    //get all private/public keeps for a user dashboard
+    getMyVaults({ commit, dispatch }, userId) {
+      api.get(`Vault/${userId}`, userId)
+        .then(res => {
+          console.log(res)
+          commit('getAllVaults', res.data)
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Failed to get vaults.')
+        })
+    },
+
+    //create a new keep
+    newVault({ commit, dispatch }, newVault) {
+      api.post('Vault', newVault)
+        .then(res => {
+          console.log(res)
+          commit('addNewVault', res.data)
+          router.push({ name: 'dashboard' })
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Failed to create new vault.')
+        })
+    },
+
+    //delete a keep from user dashboard
+    deleteVault({ commit, dispatch }, id) {
+      api.delete(`Vault/${id}`, id)
+        .then(res => {
+          console.log(res)
+          commit('getAllVaults', res.data)
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Unable to delete selected vault.')
+        })
+    },
 
 
-
-
+    //#endregion
 
     //#region -- SEARCH --
 
@@ -158,7 +206,6 @@ export default new Vuex.Store({
 
     searchFor({ commit, dispatch }, searchArr) {
       commit('searchFor', searchArr)
-      // router.push({ name: 'home' })
     }
 
     //#endregion

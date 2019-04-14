@@ -59,9 +59,10 @@ namespace Keepr
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
       services.AddTransient<IDbConnection>(x => CreateDBContext());
 
-      //add repos here
+      //Add repos here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       services.AddTransient<UserRepository>();
       services.AddTransient<KeepRepository>();
+      services.AddTransient<VaultRepository>();
 
     }
 

@@ -36,6 +36,18 @@
           <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-vault">Create
             Vault</button>
         </div>
+        <!-- vault cards -->
+        <div class="col-12" v-for="vault in vaults">
+          <div class="card d-flex flex-row mb-3 shadow">
+            <div class="card-body text-left">
+              <h6 class="card-title">{{vault.name}}</h6>
+              <p class="card-text">
+                {{vault.description}}</p>
+              <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-danger mt-2 trash"></i></a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <!-- Create Keep modal -->
@@ -79,7 +91,6 @@
         </div>
       </div>
     </div>
-
     <!-- Create Vault modal -->
     <div class="modal fade" id="create-vault" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
       aria-hidden="true">
@@ -94,18 +105,18 @@
           <div class="modal-body mbv">
             <form>
               <div class="form-group">
-                <input v-model="newKeep.name" type="text" class="form-control" id="formGroupExampleInput"
+                <input v-model="newVault.name" type="text" class="form-control" id="formGroupExampleInput"
                   placeholder="Name of new Vault...">
               </div>
               <div class="form-group">
-                <input v-model="newKeep.description" type="text" class="form-control" id="formGroupExampleInput2"
+                <input v-model="newVault.description" type="text" class="form-control" id="formGroupExampleInput2"
                   placeholder="Description...">
               </div>
             </form>
           </div>
           <div class="modal-footer mfv">
             <button type="button" class="btn btn-outline-secondary shadow" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-outline-dark shadow" @click="newKeepPost"
+            <button type="button" class="btn btn-outline-dark shadow" @click="createNewVault"
               data-dismiss="modal">Submit</button>
           </div>
         </div>
@@ -122,6 +133,7 @@
     name: "dashboard",
     beforeMount() {
       this.getMyKeeps()
+      this.getMyVaults()
     },
     mounted() {
       //blocks users not logged in
@@ -141,6 +153,11 @@
           keeps: 0,
           shares: 0,
           views: 0
+        },
+        newVault: {
+          name: "",
+          description: "",
+          userId: "",
         }
 
       };
@@ -151,6 +168,9 @@
       },
       keeps() {
         return this.$store.state.keeps
+      },
+      vaults() {
+        return this.$store.state.vaults
       }
     },
     methods: {
@@ -159,10 +179,6 @@
         let newK = this.newKeep
 
         this.$store.dispatch('newKeep', newK)
-        // this.newKeep.name = ''
-        // this.newKeep.description = ''
-        // this.newKeep.img = ''
-        // this.newKeep.isPrivate = false
       },
       getMyKeeps() {
         let userId = this.activeUser.id
@@ -170,6 +186,19 @@
       },
       deleteKeep(id) {
         this.$store.dispatch('deleteKeep', id)
+        this.$router.push({ name: 'dashboard' })
+      },
+      createNewVault() {
+        this.newVault.userId = this.activeUser.id
+        let newV = this.newVault
+        this.$store.dispatch('newVault', newV)
+      },
+      getMyVaults() {
+        let userId = this.activeUser.id
+        this.$store.dispatch('getMyVaults', userId)
+      },
+      deleteVault(id) {
+        this.$store.dispatch('deleteVault', id)
         this.$router.push({ name: 'dashboard' })
       }
     },
@@ -196,6 +225,7 @@
     background-image: linear-gradient(to right, rgb(235, 232, 232) 2%, white);
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 18px;
   }
 
   .card-img-side {

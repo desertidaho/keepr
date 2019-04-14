@@ -79,7 +79,6 @@
 <style scoped>
   .home {
     min-height: 100vh;
-    /* background-image: linear-gradient(to right, #ff7300 30%, #ffc400); */
   }
 
   .card {
