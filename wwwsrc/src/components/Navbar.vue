@@ -3,14 +3,18 @@
     <nav class="navbar navbar-light">
       <div class="col-3 d-flex justify-content-start">
         <a class="navbar-brand" href="#!">
-          <img src="@/assets/k.jpg" alt="K logo" class="logo">
+          <router-link class="" to="/home"><img src="@/assets/k.jpg" alt="K logo" class="logo">
+          </router-link>
         </a>
       </div>
       <div class="col-6 d-flex justify-content-center" v-if="!atLogin">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <form class="form-inline" @submit.prevent="search(searchQuery)">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="searchQuery">
           <button class="btn btn-outline-warning my-2 my-sm-0 search" type="submit">Search</button>
         </form>
+        <button v-if="searched.length > 0" class="btn btn-outline-warning my-2 my-sm-0 search ml-2"
+          @click="clearSearch">Clear
+          Search</button>
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="!activeUser.active && !atLogin">
         <button class="btn btn-outline-warning my-2 my-sm-0 in" type="submit" v-if="" @click="signIn">Sign In</button>
@@ -49,12 +53,19 @@
       return {
         atHome: false,
         atLogin: false,
-        atDashboard: false
+        atDashboard: false,
+        searchQuery: ''
       };
     },
     computed: {
       activeUser() {
         return this.$store.state.user
+      },
+      keeps() {
+        return this.$store.state.keeps
+      },
+      searched() {
+        return this.$store.state.search
       }
 
     },
@@ -75,7 +86,31 @@
       },
       home() {
         this.$router.push({ name: 'home' })
+      },
+      search(searchQuery) {
+        let keeps = this.keeps
+        let searchArr = []
+        let query = searchQuery.toLowerCase()
+        for (let i = 0; i < keeps.length; i++) {
+          let keep = keeps[i]
+          for (let key in keep) {
+            if (keep.hasOwnProperty(key)) {
+              if (keep[key].toString().toLowerCase().includes(query)) {
+                if (!searchArr.includes(keep)) {
+                  searchArr.push(keep)
+                }
+              }
+            }
+          }
+        }
+        this.$store.dispatch('searchFor', searchArr)
+        this.$router.push({ name: 'home' })
+      },
+      clearSearch() {
+        this.searchQuery = ''
+        this.$store.dispatch("clearSearch")
       }
+
     },
     components: {}
   };

@@ -4,7 +4,7 @@
     <div class="row mt-4">
       <div class="col-5">
         <div class="col-12 mt-3">
-          <button class="btn btn-lg btn-outline-light shadow mb-4" data-toggle="modal" data-target="#create-keep">Create
+          <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-keep">Create
             Keep</button>
         </div>
         <!-- keep cards -->
@@ -33,8 +33,8 @@
 
       <div class="col-7">
         <div class="col-12 mt-3">
-          <button class="btn btn-lg btn-outline-light shadow mb-4" data-toggle="modal"
-            data-target="#create-vault">Create Vault</button>
+          <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-vault">Create
+            Vault</button>
         </div>
       </div>
     </div>
@@ -182,7 +182,7 @@
 <style scoped>
   .dashboard {
     min-height: 100vh;
-    background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
+    /* background-image: linear-gradient(to right, #ff7300 30%, #ffc400); */
   }
 
   .card,
@@ -193,7 +193,7 @@
   }
 
   .card-body {
-    background-image: linear-gradient(to right, rgb(224, 223, 223) 30%, white);
+    background-image: linear-gradient(to right, rgb(235, 232, 232) 2%, white);
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
   }

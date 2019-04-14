@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mt-4">
         <!-- keep cards -->
-        <div class="col-2" v-for="keep in keeps">
+        <div v-if="searched.length == 0" class="col-2" v-for="keep in keeps">
           <div class="card mb-3 shadow">
             <img class="card-img-top" :src="keep.img" alt="Card image cap">
             <div class="card-body text-left">
@@ -15,6 +15,25 @@
               <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
               <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
               <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
+              <div class="text-center">
+                <button v-if="activeUser.id" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
+                  Vault</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- search results -->
+        <div v-if="searched.length > 0" class="col-2" v-for="search in searched">
+          <div class="card mb-3 shadow">
+            <img class="card-img-top" :src="search.img" alt="Card image cap">
+            <div class="card-body text-left">
+              <h6 class="card-title">{{search.name}}</h6>
+              <p class="card-text">
+                {{search.description}}
+              </p>
+              <i class="far fa-eye"></i><span class="ml-3">{{search.views}}</span><br>
+              <i class="fas fa-share"></i><span class="num-shares">{{search.shares}}</span><br>
+              <i class="fas fa-file-download"></i><span class="num-keeps">{{search.keeps}}</span><br>
               <div class="text-center">
                 <button v-if="activeUser.id" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
                   Vault</button>
@@ -46,6 +65,9 @@
       },
       keeps() {
         return this.$store.state.keeps
+      },
+      searched() {
+        return this.$store.state.search
       }
     },
     components: {
@@ -57,7 +79,7 @@
 <style scoped>
   .home {
     min-height: 100vh;
-    background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
+    /* background-image: linear-gradient(to right, #ff7300 30%, #ffc400); */
   }
 
   .card {
@@ -75,7 +97,7 @@
   }
 
   .card-body {
-    background-image: linear-gradient(to bottom, rgb(224, 223, 223), white);
+    background-image: linear-gradient(to bottom, rgb(235, 232, 232) 2%, white);
     border-top-left-radius: 2px;
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 20px;

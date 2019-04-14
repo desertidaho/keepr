@@ -23,6 +23,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     keeps: [],
+    search: []
   },
   mutations: {
     setUser(state, user) {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     getAllKeeps(state, data) {
       state.keeps = data
+    },
+    searchFor(state, searchArr) {
+      state.search = searchArr
     }
   },
   actions: {
@@ -138,5 +142,26 @@ export default new Vuex.Store({
     },
 
     //#endregion
+
+
+
+
+
+
+    //#region -- SEARCH --
+
+    // Search
+
+    clearSearch({ commit, dispatch }) {
+      commit('searchFor', [])
+    },
+
+    searchFor({ commit, dispatch }, searchArr) {
+      commit('searchFor', searchArr)
+      // router.push({ name: 'home' })
+    }
+
+    //#endregion
+
   }
 })
