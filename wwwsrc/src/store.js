@@ -122,7 +122,20 @@ export default new Vuex.Store({
           console.log(e)
           console.log('Failed to create new keep.')
         })
-    }
+    },
+
+    //delete a keep from user dashboard
+    deleteKeep({ commit, dispatch }, id) {
+      api.delete(`Keep/${id}`, id)
+        .then(res => {
+          console.log(res)
+          commit('getAllKeeps', res.data)
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Unable to delete selected keep.')
+        })
+    },
 
     //#endregion
   }

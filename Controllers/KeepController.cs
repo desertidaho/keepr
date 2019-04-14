@@ -20,7 +20,7 @@ namespace Keepr.Controllers
       _kr = kr;
     }
 
-    //GETALL
+    //GETALL for home
     [HttpGet]
     public ActionResult<IEnumerable<Keep>> Get()
     {
@@ -46,6 +46,15 @@ namespace Keepr.Controllers
       Keep newKeep = _kr.CreateKeep(keep);
       if (newKeep == null) { return BadRequest("Something went wrong."); }
       return Ok(newKeep);
+    }
+
+    //DELETE
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id)
+    {
+      bool successful = _kr.Delete(id);
+      if (!successful) { return BadRequest(); }
+      return Ok();
     }
 
 

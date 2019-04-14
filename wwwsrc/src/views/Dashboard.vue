@@ -2,12 +2,9 @@
   <div class="dashboard">
     <navbar />
     <div class="row mt-4">
-      <div class="col-4">
-        <div class="col-12">
-          <h4 class="text-light">Keeps</h4>
-        </div>
-        <div class="col-12">
-          <button class="btn btn-outline-light shadow mb-4" data-toggle="modal" data-target="#create-keep">Create
+      <div class="col-5">
+        <div class="col-12 mt-3">
+          <button class="btn btn-lg btn-outline-light shadow mb-4" data-toggle="modal" data-target="#create-keep">Create
             Keep</button>
         </div>
         <!-- keep cards -->
@@ -19,18 +16,25 @@
               <p class="card-text">
                 {{keep.description}}
               </p>
-              <p class="card-text">
-                {{keep.isPrivate}}
-              </p>
-              <a href="#!" class="btn btn-sm btn-dark shadow">Add To Vault</a>
+              <p v-if="keep.isPrivate" class="card-text">Private</p>
+              <p v-if="!keep.isPrivate" class="card-text">Public</p>
+              <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
+              <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
+              <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
+              <a href="" @click="deleteKeep(keep.id)"><i class="fas fa-trash text-danger mt-2 trash"></i></a>
+              <div class="text-center">
+
+                <a href="#!" class="btn btn-sm btn-secondary shadow add-to-vault">Add To Vault</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-8">
-        <div class="col-12">
-          <h4 class="text-light">Vaults</h4>
+      <div class="col-7">
+        <div class="col-12 mt-3">
+          <button class="btn btn-lg btn-outline-light shadow mb-4" data-toggle="modal"
+            data-target="#create-vault">Create Vault</button>
         </div>
       </div>
     </div>
@@ -39,13 +43,13 @@
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header mhk">
             <h5 class="modal-title text-light" id="exampleModal3Label">Make a Keep</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body mbk">
             <form>
               <div class="form-group">
                 <input v-model="newKeep.name" type="text" class="form-control" id="formGroupExampleInput"
@@ -67,7 +71,49 @@
               </div>
             </form>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer mfk">
+            <button type="button" class="btn btn-outline-secondary shadow" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-dark shadow" @click="newKeepPost"
+              data-dismiss="modal">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Vault modal -->
+    <div class="modal fade" id="create-vault" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header mhv">
+            <h5 class="modal-title text-light" id="exampleModal3Label">Make a Vault</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body mbv">
+            <form>
+              <div class="form-group">
+                <input v-model="newKeep.name" type="text" class="form-control" id="formGroupExampleInput"
+                  placeholder="Name of new Keep...">
+              </div>
+              <div class="form-group">
+                <input v-model="newKeep.description" type="text" class="form-control" id="formGroupExampleInput2"
+                  placeholder="Description...">
+              </div>
+              <div class="form-group">
+                <input v-model="newKeep.img" type="text" class="form-control" id="formGroupExampleInput"
+                  placeholder="Image UrL...">
+              </div>
+              <div class="form-group d-flex justify-content-start ml-4">
+                <input v-model="newKeep.isPrivate" class="form-check-input" type="checkbox" value="" id="isPrivate">
+                <label class="form-check-label" for="isPrivate">
+                  Private (If checked only you can see.)
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer mfv">
             <button type="button" class="btn btn-outline-secondary shadow" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-outline-dark shadow" @click="newKeepPost"
               data-dismiss="modal">Submit</button>
@@ -131,6 +177,10 @@
       getMyKeeps() {
         let userId = this.activeUser.id
         this.$store.dispatch('getMyKeeps', userId)
+      },
+      deleteKeep(id) {
+        this.$store.dispatch('deleteKeep', id)
+        this.$router.push({ name: 'dashboard' })
       }
     },
     components: {
@@ -160,23 +210,62 @@
   .card-img-side {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    max-width: 50%;
+    max-width: 60%;
+    min-width: 60%;
     object-fit: cover;
+    /* min-height: 100%;
+    max-height: 100%; */
   }
 
   .card-text {
     font-size: 0.7rem;
   }
 
-  .modal-header {
+  .fa-eye {
+    color: rgb(65, 32, 32);
+  }
+
+  .fa-share {
+    color: blue;
+  }
+
+  .fa-file-download {
+    color: green;
+    margin-left: 0.15rem;
+  }
+
+  .num-shares {
+    margin-left: 1.1rem;
+  }
+
+  .num-keeps {
+    margin-left: 1.21rem;
+  }
+
+  .trash {
+    margin-left: 0.1rem;
+  }
+
+  .add-to-vault {
+    position: absolute;
+    bottom: 10px;
+  }
+
+  .mhk,
+  .mfv {
     background-color: #ff7300;
   }
 
-  .modal-body {
+  .mbk {
     background-image: linear-gradient(#ff7300 30%, #ffc400);
   }
 
-  .modal-footer {
+  .mfk,
+  .mhv {
     background-color: #ffc400;
+  }
+
+  .mbv {
+    background-image: linear-gradient(#ffc400 30%, #ff7300);
   }
 </style>

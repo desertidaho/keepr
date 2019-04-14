@@ -15,11 +15,13 @@ namespace keepr.Repositories
       _db = db;
     }
 
+    //get all public keeps for home view
     public IEnumerable<Keep> GetALL()
     {
       return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate = 'false'");
     }
 
+    //get all public/private keeps by userId for dashboard
     public IEnumerable<Keep> GetById(string userId)
     {
       return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @UserId", new { userId });
