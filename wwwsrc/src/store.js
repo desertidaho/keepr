@@ -137,7 +137,7 @@ export default new Vuex.Store({
         })
     },
 
-    //edit a keep by incrementing number of views
+    //edit a keep by incrementing number of views or saves to vaults
     updateViews({ commit, dispatch }, editedKeep) {
       let id = editedKeep.id
       api.put(`Keep/${id}`, editedKeep)

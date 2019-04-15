@@ -90,6 +90,11 @@
   import Navbar from '@/components/Navbar.vue'
   export default {
     name: "home",
+    beforeMount() {
+      if (this.activeUser.id) {
+        this.getMyVaults()
+      }
+    },
     mounted() {
       this.$store.dispatch('getKeeps')
     },
@@ -154,6 +159,10 @@
         payload.userId = vault.userId
         this.$store.dispatch('addKeepToVault', payload)
         this.setViewKeep(keep)
+      },
+      getMyVaults() {
+        let userId = this.activeUser.id
+        this.$store.dispatch('getMyVaults', userId)
       }
     },
     components: {

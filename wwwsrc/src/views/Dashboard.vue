@@ -216,6 +216,8 @@
         payload.keepId = keep.id
         payload.userId = vault.userId
         this.$store.dispatch('addKeepToVault', payload)
+        keep.keeps++
+        this.$store.dispatch('updateViews', keep)
       },
       getMyVaultKeeps() {
         let userId = this.activeUser.id
