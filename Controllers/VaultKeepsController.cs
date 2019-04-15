@@ -12,39 +12,37 @@ namespace Keepr.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class VaultController : ControllerBase
+  public class VaultKeepsController : ControllerBase
   {
-    private readonly VaultRepository _vr;
-    public VaultController(VaultRepository vr)
+    private readonly VaultKeepsRepository _vkr;
+    public VaultKeepsController(VaultKeepsRepository vkr)
     {
-      _vr = vr;
+      _vkr = vkr;
     }
-
 
     //GETBYUSERID for dashboard
     [HttpGet("{userId}")]
-    public ActionResult<Vault> Get(string userId)
+    public ActionResult<VaultKeeps> Get(string userId)
     {
-      IEnumerable<Vault> found = _vr.GetById(userId);
+      IEnumerable<VaultKeeps> found = _vkr.GetById(userId);
       if (found == null) { return BadRequest(); }
       return Ok(found);
     }
 
-
     //CREATE
     [HttpPost]
-    public ActionResult<Vault> Create([FromBody] Vault vault)
+    public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps vaultkeeps)
     {
-      Vault newVault = _vr.CreateVault(vault);
-      if (newVault == null) { return BadRequest("Something went wrong."); }
-      return Ok(newVault);
+      VaultKeeps newVaultKeeps = _vkr.CreateVaultKeeps(vaultkeeps);
+      if (newVaultKeeps == null) { return BadRequest("Something went wrong."); }
+      return Ok(newVaultKeeps);
     }
 
     //DELETE
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {
-      bool successful = _vr.Delete(id);
+      bool successful = _vkr.Delete(id);
       if (!successful) { return BadRequest(); }
       return Ok();
     }

@@ -23,7 +23,15 @@
               <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
               <a href="" @click="deleteKeep(keep.id)"><i class="fas fa-trash text-danger mt-2 trash-k"></i></a>
               <div class="text-center">
-                <a href="#!" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To Vault</a>
+                <div class="dropdown mt-2">
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault" type="button"
+                    data-toggle="dropdown">Add To Vault
+                    <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li v-for="vault in vaults"><a href="" @click="addKeepToVault(keep, vault)"
+                        class="text-dark ml-2">{{vault.name}}</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -131,13 +139,12 @@
     beforeMount() {
       this.getMyKeeps()
       this.getMyVaults()
+      this.getMyVaultKeeps()
     },
     mounted() {
-      //blocks users not logged in
       if (!this.$store.state.user.id) {
         this.$router.push({ name: "login" });
       }
-
     },
     data() {
       return {
@@ -167,6 +174,9 @@
       },
       vaults() {
         return this.$store.state.vaults
+      },
+      vaultkeeps() {
+        return this.$store.state.vaultkeeps
       }
     },
     methods: {
@@ -196,6 +206,17 @@
       deleteVault(id) {
         this.$store.dispatch('deleteVault', id)
         this.$router.push({ name: 'dashboard' })
+      },
+      addKeepToVault(keep, vault) {
+        let payload = {}
+        payload.vaultId = vault.id
+        payload.keepId = keep.id
+        payload.userId = vault.userId
+        this.$store.dispatch('addKeepToVault', payload)
+      },
+      getMyVaultKeeps() {
+        let userId = this.activeUser.id
+        this.$store.dispatch('getMyVaultKeeps', userId)
       }
     },
     components: {

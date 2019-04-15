@@ -24,7 +24,8 @@ export default new Vuex.Store({
     user: {},
     keeps: [],
     search: [],
-    vaults: []
+    vaults: [],
+    vaultkeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -45,6 +46,12 @@ export default new Vuex.Store({
     getAllVaults(state, data) {
       state.vaults = data
     },
+    addNewVaultKeeps(state, newVaultKeeps) {
+      state.vaultkeeps.unshift(newVaultKeeps)
+    },
+    getAllVaultKeeps(state, data) {
+      state.vaultkeeps = data
+    }
   },
   actions: {
 
@@ -204,6 +211,35 @@ export default new Vuex.Store({
         })
     },
 
+    //#endregion
+
+    //#region -- VAULTKEEPS --
+
+    //create a new vault
+    addKeepToVault({ commit, dispatch }, payload) {
+      api.post('VaultKeeps', payload)
+        .then(res => {
+          console.log(res)
+          commit('addNewVaultKeeps', payload)
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Failed to create new vault.')
+        })
+    },
+
+    //get all private/public vaults for a user dashboard
+    getMyVaultKeeps({ commit, dispatch }, userId) {
+      api.get(`VaultKeeps/${userId}`, userId)
+        .then(res => {
+          console.log(res.data)
+          commit('getAllVaultKeeps', res.data)
+        })
+        .catch(e => {
+          console.log(e)
+          console.log('Failed to get vaults.')
+        })
+    },
 
     //#endregion
 

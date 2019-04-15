@@ -17,8 +17,20 @@
               <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
               <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
               <div class="text-center">
-                <button v-if="activeUser.id" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
-                  Vault</button>
+                <!-- <button v-if="activeUser.id" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
+                  Vault</button> -->
+
+                <div v-if="activeUser.id" class="dropdown mt-2">
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault" type="button"
+                    data-toggle="dropdown">Add
+                    To Vault
+                    <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li v-for="vault in vaults"><a href="" @click="addKeepToVault(keep, vault)"
+                        class="text-dark ml-2">{{vault.name}}</a></li>
+                  </ul>
+                </div>
+
               </div>
             </div>
           </div>
@@ -57,10 +69,10 @@
                 <p class="card-text ml-3 view-keep-desc">
                   {{viewKeep.description}}
                 </p>
-                <img class="card-img-top view-keep-img" :src="viewKeep.img" alt="Card image cap">
+                <img class="card-img-top view-keep-img mb-2" :src="viewKeep.img" alt="Card image cap">
               </div>
               <div class="modal-footer mfv d-flex justify-content-center">
-                <i class="far fa-eye"></i><span class="ml-2">{{viewKeep.views}}</span>
+                <i class="far fa-eye"></i><span class="ml-2">{{viewKeep.views + 1}}</span>
                 <i class="fas fa-share ml-5"></i><span class="num-shares ml-2">{{viewKeep.shares}}</span>
                 <i class="fas fa-file-download ml-5"></i><span class="num-keeps ml-2">{{viewKeep.keeps}}</span>
                 <div class="py-4">
@@ -95,9 +107,7 @@
           views: '',
           shares: '',
           keeps: ''
-
         }
-
       };
     },
     computed: {
@@ -109,6 +119,12 @@
       },
       searched() {
         return this.$store.state.search
+      },
+      vaults() {
+        return this.$store.state.vaults
+      },
+      vaultkeeps() {
+        return this.$store.state.vaultkeeps
       }
     },
     methods: {
@@ -124,6 +140,13 @@
       },
       updateViews(keep) {
         this.$store.dispatch('updateViews', keep)
+      },
+      addKeepToVault(keep, vault) {
+        let payload = {}
+        payload.vaultId = vault.id
+        payload.keepId = keep.id
+        payload.userId = vault.userId
+        this.$store.dispatch('addKeepToVault', payload)
       }
     },
     components: {
