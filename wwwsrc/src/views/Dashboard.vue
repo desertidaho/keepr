@@ -50,6 +50,9 @@
               <h6 class="card-title">{{vault.name}}</h6>
               <p class="card-text">
                 {{vault.description}}</p>
+              <div v-for="vaultkeep in vaultkeeps">
+                <p v-if="vault.id == vaultkeep.vaultId">{{vaultkeep.keepId}}</p>
+              </div>
             </div>
           </div>
         </div>

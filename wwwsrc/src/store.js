@@ -110,7 +110,6 @@ export default new Vuex.Store({
           commit('getAllKeeps', res.data)
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to get keeps.')
         })
     },
@@ -122,7 +121,6 @@ export default new Vuex.Store({
           commit('getAllKeeps', res.data)
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to get keeps for a user.')
         })
     },
@@ -131,12 +129,10 @@ export default new Vuex.Store({
     newKeep({ commit, dispatch }, newKeep) {
       api.post('Keep', newKeep)
         .then(res => {
-          console.log(res)
           commit('addNewKeep', res.data)
           router.push({ name: 'dashboard' })
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to create new keep.')
         })
     },
@@ -149,7 +145,6 @@ export default new Vuex.Store({
           dispatch('getKeeps')
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to edit keep.')
         })
     },
@@ -158,11 +153,9 @@ export default new Vuex.Store({
     deleteKeep({ commit, dispatch }, id) {
       api.delete(`Keep/${id}`, id)
         .then(res => {
-          console.log(res)
           commit('getAllKeeps', res.data)
         })
         .catch(e => {
-          console.log(e)
           console.log('Unable to delete selected keep.')
         })
     },
@@ -175,11 +168,9 @@ export default new Vuex.Store({
     getMyVaults({ commit, dispatch }, userId) {
       api.get(`Vault/${userId}`, userId)
         .then(res => {
-          console.log(res)
           commit('getAllVaults', res.data)
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to get vaults.')
         })
     },
@@ -188,12 +179,10 @@ export default new Vuex.Store({
     newVault({ commit, dispatch }, newVault) {
       api.post('Vault', newVault)
         .then(res => {
-          console.log(res)
           commit('addNewVault', res.data)
           router.push({ name: 'dashboard' })
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to create new vault.')
         })
     },
@@ -202,11 +191,9 @@ export default new Vuex.Store({
     deleteVault({ commit, dispatch }, id) {
       api.delete(`Vault/${id}`, id)
         .then(res => {
-          console.log(res)
           commit('getAllVaults', res.data)
         })
         .catch(e => {
-          console.log(e)
           console.log('Unable to delete selected vault.')
         })
     },
@@ -219,11 +206,9 @@ export default new Vuex.Store({
     addKeepToVault({ commit, dispatch }, payload) {
       api.post('VaultKeeps', payload)
         .then(res => {
-          console.log(res)
           commit('addNewVaultKeeps', payload)
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to create new vault.')
         })
     },
@@ -232,11 +217,9 @@ export default new Vuex.Store({
     getMyVaultKeeps({ commit, dispatch }, userId) {
       api.get(`VaultKeeps/${userId}`, userId)
         .then(res => {
-          console.log(res.data)
           commit('getAllVaultKeeps', res.data)
         })
         .catch(e => {
-          console.log(e)
           console.log('Failed to get vaults.')
         })
     },
@@ -244,8 +227,6 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- SEARCH --
-
-    // Search
 
     clearSearch({ commit, dispatch }) {
       commit('searchFor', [])

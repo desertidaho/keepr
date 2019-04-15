@@ -17,9 +17,6 @@
               <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
               <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
               <div class="text-center">
-                <!-- <button v-if="activeUser.id" class="btn btn-sm btn-outline-secondary shadow add-to-vault ml-3">Add To
-                  Vault</button> -->
-
                 <div v-if="activeUser.id" class="dropdown mt-2">
                   <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault" type="button"
                     data-toggle="dropdown">Add
@@ -30,7 +27,6 @@
                         class="text-dark ml-2">{{vault.name}}</a></li>
                   </ul>
                 </div>
-
               </div>
             </div>
           </div>
@@ -128,15 +124,25 @@
       }
     },
     methods: {
-      setViewKeep(id) {
-        let keep = this.keeps.find(k => k.id == id);
-        this.viewKeep.name = keep.name
-        this.viewKeep.description = keep.description
-        this.viewKeep.img = keep.img
-        this.viewKeep.views = keep.views++
-        this.viewKeep.shares = keep.shares
-        this.viewKeep.keeps = keep.keeps
-        this.updateViews(keep)
+      setViewKeep(data) {
+        if (data > 0) {
+          let keep = this.keeps.find(k => k.id == data);
+          this.viewKeep.name = keep.name
+          this.viewKeep.description = keep.description
+          this.viewKeep.img = keep.img
+          this.viewKeep.views = keep.views++
+          this.viewKeep.shares = keep.shares
+          this.viewKeep.keeps = keep.keeps
+          this.updateViews(keep)
+        } else {
+          this.viewKeep.name = data.name
+          this.viewKeep.description = data.description
+          this.viewKeep.img = data.img
+          this.viewKeep.views = data.views
+          this.viewKeep.shares = data.shares
+          this.viewKeep.keeps = data.keeps++
+          this.updateViews(data)
+        }
       },
       updateViews(keep) {
         this.$store.dispatch('updateViews', keep)
@@ -147,6 +153,7 @@
         payload.keepId = keep.id
         payload.userId = vault.userId
         this.$store.dispatch('addKeepToVault', payload)
+        this.setViewKeep(keep)
       }
     },
     components: {
