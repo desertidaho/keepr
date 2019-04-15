@@ -9,16 +9,18 @@
             <a @click="setViewKeep(keep.id)"><img data-toggle="modal" data-target="#view-keep" class="card-img-top"
                 :src="keep.img" alt="Card image cap"></a>
             <div class="card-body text-left px-3">
-              <h6 class="card-title">{{keep.name}}</h6>
-              <p class="card-text">
-                {{keep.description}}
-              </p>
+              <a @click="setViewKeep(keep.id)">
+                <h6 class="card-title" data-toggle="modal" data-target="#view-keep">{{keep.name}}</h6>
+                <p class="card-text mb-2" data-toggle="modal" data-target="#view-keep">
+                  {{keep.description}}
+                </p>
+              </a>
               <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
-              <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
-              <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
+              <i class="fas fa-share mt-2"></i><span class="num-shares">{{keep.shares}}</span><br>
+              <i class="fas fa-file-download mt-2"></i><span class="num-keeps">{{keep.keeps}}</span><br>
               <div class="text-center">
                 <div v-if="activeUser.id" class="dropdown mt-2">
-                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault" type="button"
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow" type="button"
                     data-toggle="dropdown">Add
                     To Vault
                     <span class="caret"></span></button>
@@ -199,8 +201,13 @@
     border-bottom-left-radius: 20px;
   }
 
+  .card-title {
+    cursor: pointer;
+  }
+
   .card-text {
     font-size: 0.7rem;
+    cursor: pointer;
   }
 
   .fa-eye {

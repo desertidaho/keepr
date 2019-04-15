@@ -12,9 +12,8 @@
           <div class="card d-flex flex-row mb-3 shadow">
             <img class="card-img-side" :src="keep.img" alt="Card image cap">
             <div class="card-body text-left">
-
               <h6 class="card-title">{{keep.name}} <a href="" @click="deleteKeep(keep.id)"><i
-                    class="fas fa-trash text-dark trash-k"></i></a> </h6>
+                    class="fas fa-trash text-dark trash-k shadow"></i></a> </h6>
               <p class="card-text">
                 {{keep.description}}
               </p>
@@ -25,7 +24,7 @@
               <i class="fas fa-file-download ml-5 mb-3"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
               <div class="text-start">
                 <div class="dropdown mt-5 ml-5">
-                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault" type="button"
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow" type="button"
                     data-toggle="dropdown">Add To Vault
                     <span class="caret"></span></button>
                   <ul class="dropdown-menu">
@@ -47,7 +46,7 @@
         <div class="col-12" v-for="vault in vaults">
           <div class="card d-flex flex-row mb-3 shadow">
             <div class="card-body text-left cbv" id="card-vaults">
-              <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-dark mt-2 trash-v"></i></a>
+              <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-dark mt-2 trash-v shadow"></i></a>
               <h6 class="card-title text-light">{{vault.name}}</h6>
               <p class="card-text text-light">
                 {{vault.description}}</p>
@@ -59,7 +58,7 @@
                     <div class="" id="keep-vault-body">
                       <h6 class="card-title ml-2 mt-2">{{keep.name}} <a href=""
                           @click="deleteKeepFromVault(vault, keep)"><i
-                            class="fas fa-trash text-dark mr-2 trash-v"></i></a> </h6>
+                            class="fas fa-trash text-dark mr-2 trash-v shadow"></i></a> </h6>
                       <p class="card-text keep-vault-description mx-2">
                         {{keep.description}}
                       </p>
