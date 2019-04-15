@@ -214,6 +214,7 @@ export default new Vuex.Store({
       api.post('VaultKeeps', payload)
         .then(res => {
           commit('addNewVaultKeeps', payload)
+          router.push({ name: 'dashboard' })
         })
         .catch(e => {
           console.log('Failed to create new vault.')
@@ -225,6 +226,7 @@ export default new Vuex.Store({
       api.get(`VaultKeeps/${userId}`, userId)
         .then(res => {
           commit('getAllVaultKeeps', res.data)
+          router.push({ name: 'dashboard' })
         })
         .catch(e => {
           console.log('Failed to get vaults.')
@@ -237,6 +239,7 @@ export default new Vuex.Store({
         .then(res => {
           let keepArr = res.data
           commit('getKeepsInAVault', { vaultId, keepArr })
+          router.push({ name: 'dashboard' })
         })
         .catch(e => {
           console.log('Failed to get vaults.')

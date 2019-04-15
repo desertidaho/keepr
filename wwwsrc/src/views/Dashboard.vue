@@ -245,7 +245,6 @@
         this.$store.dispatch('addKeepToVault', payload)
         keep.keeps++
         this.$store.dispatch('updateViews', keep)
-        this.$router.push({ name: 'dashboard' })
       },
       getMyVaultKeeps() {
         let userId = this.activeUser.id
