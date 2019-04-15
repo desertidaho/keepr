@@ -53,7 +53,7 @@ namespace keepr.Repositories
 
     public bool Delete(int id)
     {
-      int success = _db.Execute("DELETE FROM vaultkeeps WHERE id = @id", new { id });
+      int success = _db.Execute("DELETE FROM vaultkeeps WHERE id = @Id", new { id });
       return success > 0;
     }
 

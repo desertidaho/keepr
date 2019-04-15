@@ -2,28 +2,29 @@
   <div class="dashboard">
     <navbar />
     <div class="row mt-4">
-      <div class="col-5">
+      <div class="col-4">
         <div class="col-12 mt-3">
           <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-keep">Create
             Keep</button>
         </div>
         <!-- keep cards -->
-        <div class="col-12" v-for="keep in keeps">
+        <div class="col-12 ml-2" v-for="keep in keeps">
           <div class="card d-flex flex-row mb-3 shadow">
             <img class="card-img-side" :src="keep.img" alt="Card image cap">
             <div class="card-body text-left">
-              <h6 class="card-title">{{keep.name}}</h6>
+
+              <h6 class="card-title">{{keep.name}} <a href="" @click="deleteKeep(keep.id)"><i
+                    class="fas fa-trash text-dark trash-k"></i></a> </h6>
               <p class="card-text">
                 {{keep.description}}
               </p>
               <p v-if="keep.isPrivate" class="card-text">Private</p>
               <p v-if="!keep.isPrivate" class="card-text">Public</p>
-              <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
-              <i class="fas fa-share"></i><span class="num-shares">{{keep.shares}}</span><br>
-              <i class="fas fa-file-download"></i><span class="num-keeps">{{keep.keeps}}</span><br>
-              <a href="" @click="deleteKeep(keep.id)"><i class="fas fa-trash text-danger mt-2 trash-k"></i></a>
-              <div class="text-center">
-                <div class="dropdown mt-2">
+              <i class="far fa-eye"></i><span class="ml-2">{{keep.views}}</span>
+              <i class="fas fa-share ml-5"></i><span class="num-shares ml-2">{{keep.shares}}</span>
+              <i class="fas fa-file-download ml-5 mb-3"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
+              <div class="text-start">
+                <div class="dropdown mt-5 ml-5">
                   <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault" type="button"
                     data-toggle="dropdown">Add To Vault
                     <span class="caret"></span></button>
@@ -37,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class="col-7">
+      <div class="col-8">
         <div class="col-12 mt-3">
           <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-vault">Create
             Vault</button>
@@ -45,23 +46,28 @@
         <!-- vault cards -->
         <div class="col-12" v-for="vault in vaults">
           <div class="card d-flex flex-row mb-3 shadow">
-            <div class="card-body text-left cbv">
-              <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-danger mt-2 trash-v"></i></a>
-              <h6 class="card-title">{{vault.name}}</h6>
-              <p class="card-text">
+            <div class="card-body text-left cbv" id="card-vaults">
+              <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-dark mt-2 trash-v"></i></a>
+              <h6 class="card-title text-light">{{vault.name}}</h6>
+              <p class="card-text text-light">
                 {{vault.description}}</p>
               <div class="col-12 d-flex flex-row">
+                <!-- keep cards in vaults -->
                 <div v-for="keep in keepsinavault[vault.id]">
-                  <div class="card ml-2">
-                    <img class="card-img-top imgs-in-vaults" :src="keep.img" alt="Card image cap">
-                    <div class="card-body">
-                      <h4 class="card-title">{{keep.name}}</h4>
-                      <p class="card-text">
+                  <div class="card ml-2 card-keep-vault shadow">
+                    <img class="card-img-top img-in-vault" :src="keep.img" alt="Card image cap">
+                    <div class="" id="keep-vault-body">
+                      <h6 class="card-title ml-2 mt-2">{{keep.name}} <a href=""
+                          @click="deleteKeepFromVault(vault, keep)"><i
+                            class="fas fa-trash text-dark mr-2 trash-v"></i></a> </h6>
+                      <p class="card-text keep-vault-description mx-2">
                         {{keep.description}}
                       </p>
-                      <i class="far fa-eye"></i><span class="ml-2">{{keep.views}}</span>
-                      <i class="fas fa-share ml-4"></i><span class="num-shares ml-2">{{keep.shares}}</span>
-                      <i class="fas fa-file-download ml-4"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
+                      <div class="keep-vault-v-s-k ml-4 mb-2">
+                        <i class="far fa-eye ml-1"></i><span class="ml-1">{{keep.views}}</span>
+                        <i class="fas fa-share ml-4"></i><span class="num-shares ml-1">{{keep.shares}}</span>
+                        <i class="fas fa-file-download ml-4"></i><span class="num-keeps ml-1">{{keep.keeps}}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -249,6 +255,18 @@
       getKeepsInAVault(vaultId) {
         this.$store.dispatch('getKeepsInVault', vaultId)
         this.$router.push({ name: 'dashboard' })
+      },
+      deleteKeepFromVault(vault, keep) {
+        let vaultId = vault.id
+        let keepId = keep.id
+        let vaultKeeps = this.vaultkeeps
+        for (let i = 0; i < vaultKeeps.length; i++) {
+          let vk = vaultKeeps[i]
+          if (vk.vaultId == vaultId && vk.keepId == keepId) {
+            this.$store.dispatch('deleteKeepFromVault', vk)
+            break;
+          }
+        }
       }
     },
     components: {
@@ -275,6 +293,10 @@
     border-bottom-right-radius: 6px;
   }
 
+  #card-vaults {
+    background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
+  }
+
   .cbv {
     border-bottom-left-radius: 18px;
   }
@@ -282,8 +304,8 @@
   .card-img-side {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 18px;
-    max-width: 60%;
-    min-width: 60%;
+    max-width: 50%;
+    min-width: 50%;
     object-fit: cover;
   }
 
@@ -304,16 +326,8 @@
     margin-left: 0.15rem;
   }
 
-  .num-shares {
-    margin-left: 1.1rem;
-  }
-
-  .num-keeps {
-    margin-left: 1.21rem;
-  }
-
   .trash-k {
-    margin-left: 0.1rem;
+    float: right;
   }
 
   .trash-v {
@@ -354,5 +368,30 @@
 
   #isPrivate {
     margin-left: -6.9vw;
+  }
+
+  .card-keep-vault {
+    max-width: 10vw;
+    /* border: 1.5px solid black; */
+  }
+
+  #keep-vault-body {
+    background-color: rgb(228, 226, 226);
+    border-bottom-left-radius: 19px;
+  }
+
+  .keep-vault-description {
+    font-size: 0.64rem;
+  }
+
+  .img-in-vault {
+    max-height: 17vh;
+    min-height: 17vh;
+    object-fit: fill;
+    border-top-right-radius: 18px;
+  }
+
+  .keep-vault-v-s-k {
+    font-size: 0.7rem;
   }
 </style>

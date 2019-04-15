@@ -247,6 +247,19 @@ export default new Vuex.Store({
       commit('clearKeepsInUserVault', {})
     },
 
+    //delete a keep from a vault 
+    deleteKeepFromVault({ commit, dispatch }, vaultKeep) {
+      let id = vaultKeep.id
+      let userId = vaultKeep.userId
+      api.delete(`VaultKeeps/${id}`, id)
+        .then(res => {
+          dispatch('getMyVaultKeeps', userId)
+        })
+        .catch(e => {
+          console.log('Unable to delete keep from vault.')
+        })
+    },
+
     //#endregion
 
     //#region -- SEARCH --
