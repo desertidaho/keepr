@@ -50,9 +50,14 @@
               <h6 class="card-title">{{vault.name}}</h6>
               <p class="card-text">
                 {{vault.description}}</p>
-              <div v-for="vaultkeep in vaultkeeps">
+              <!-- <div v-for="vaultkeep in vaultkeeps">
                 <p v-if="vault.id == vaultkeep.vaultId">{{vaultkeep.keepId}}</p>
+              </div> -->
+
+              <div v-for="keep in keepsinavault[vault.id]">
+                <p>{{keep.name}}</p>
               </div>
+
             </div>
           </div>
         </div>
@@ -83,8 +88,8 @@
                 <input v-model="newKeep.img" type="text" class="form-control" id="formGroupExampleInput"
                   placeholder="Image UrL...">
               </div>
-              <div class="form-group d-flex justify-content-start">
-                <input v-model="newKeep.isPrivate" class="form-check-input mt-2" type="checkbox" value=""
+              <div class="form-group text-left">
+                <input v-model="newKeep.isPrivate" class="form-check-input mt-2 text-left" type="checkbox" value=""
                   id="isPrivate">
                 <label class="form-check-label ml-4" for="isPrivate">
                   Private (If checked only you can see.)
@@ -148,6 +153,12 @@
       if (!this.$store.state.user.id) {
         this.$router.push({ name: "login" });
       }
+      let vaults = this.vaults
+      for (let i = 0; i < vaults.length; i++) {
+        let vault = vaults[i]
+        let vaultId = vault.id
+        this.getKeepsInAVault(vaultId)
+      }
     },
     data() {
       return {
@@ -180,13 +191,15 @@
       },
       vaultkeeps() {
         return this.$store.state.vaultkeeps
+      },
+      keepsinavault() {
+        return this.$store.state.kV
       }
     },
     methods: {
       newKeepPost() {
         this.newKeep.userId = this.activeUser.id
         let newK = this.newKeep
-
         this.$store.dispatch('newKeep', newK)
       },
       getMyKeeps() {
@@ -218,10 +231,16 @@
         this.$store.dispatch('addKeepToVault', payload)
         keep.keeps++
         this.$store.dispatch('updateViews', keep)
+        this.$router.push({ name: 'dashboard' })
       },
       getMyVaultKeeps() {
         let userId = this.activeUser.id
         this.$store.dispatch('getMyVaultKeeps', userId)
+        this.$router.push({ name: 'dashboard' })
+      },
+      getKeepsInAVault(vaultId) {
+        this.$store.dispatch('getKeepsInVault', vaultId)
+        this.$router.push({ name: 'dashboard' })
       }
     },
     components: {
@@ -325,7 +344,7 @@
     border-bottom-left-radius: 18px;
   }
 
-  .form-check-input {
-    margin-left: -5.9rem;
+  #isPrivate {
+    margin-left: -6.9vw;
   }
 </style>

@@ -97,6 +97,7 @@
     },
     mounted() {
       this.$store.dispatch('getKeeps')
+      this.$store.dispatch('clearKeepsInAVault')
     },
     data() {
       return {

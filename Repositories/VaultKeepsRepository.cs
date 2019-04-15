@@ -22,6 +22,16 @@ namespace keepr.Repositories
       return _db.Query<VaultKeeps>("SELECT * FROM vaultkeeps WHERE userId = @UserId", new { userId });
     }
 
+    //get all keeps in each vault
+    internal IEnumerable<Keep> GetKeeps(int vaultId)
+    {
+      return _db.Query<Keep>(@"
+           SELECT * FROM vaultkeeps vk
+              INNER JOIN keeps k ON k.id = vk.keepId 
+              WHERE (vaultId = @VaultId) 
+            ", new { vaultId });
+    }
+
     public VaultKeeps CreateVaultKeeps(VaultKeeps vaultkeeps)
     {
       try

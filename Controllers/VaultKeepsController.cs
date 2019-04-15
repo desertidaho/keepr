@@ -29,6 +29,15 @@ namespace Keepr.Controllers
       return Ok(found);
     }
 
+    //GetAllKeepsInVault
+    [HttpGet("{vaultId}/keeps")]
+    public ActionResult<IEnumerable<Keep>> GetKeeps(int vaultId)
+    {
+      IEnumerable<Keep> results = _vkr.GetKeeps(vaultId);
+      if (results == null) { return BadRequest("Something went wrong."); }
+      return Ok(results);
+    }
+
     //CREATE
     [HttpPost]
     public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps vaultkeeps)

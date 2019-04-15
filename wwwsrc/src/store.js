@@ -25,7 +25,8 @@ export default new Vuex.Store({
     keeps: [],
     search: [],
     vaults: [],
-    vaultkeeps: []
+    vaultkeeps: [],
+    kV: {}
   },
   mutations: {
     setUser(state, user) {
@@ -51,6 +52,12 @@ export default new Vuex.Store({
     },
     getAllVaultKeeps(state, data) {
       state.vaultkeeps = data
+    },
+    getKeepsInAVault(state, { vaultId, keepArr }) {
+      Vue.set(state.kV, vaultId, keepArr)
+    },
+    clearKeepsInUserVault(state, data) {
+      state.kV = data
     }
   },
   actions: {
@@ -222,6 +229,22 @@ export default new Vuex.Store({
         .catch(e => {
           console.log('Failed to get vaults.')
         })
+    },
+
+    //get all keeps for a given vault
+    getKeepsInVault({ commit, dispatch }, vaultId) {
+      api.get(`VaultKeeps/${vaultId}/keeps`)
+        .then(res => {
+          let keepArr = res.data
+          commit('getKeepsInAVault', { vaultId, keepArr })
+        })
+        .catch(e => {
+          console.log('Failed to get vaults.')
+        })
+    },
+
+    clearKeepsInAVault({ commit, dispatch }) {
+      commit('clearKeepsInUserVault', {})
     },
 
     //#endregion
