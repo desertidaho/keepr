@@ -50,14 +50,22 @@
               <h6 class="card-title">{{vault.name}}</h6>
               <p class="card-text">
                 {{vault.description}}</p>
-              <!-- <div v-for="vaultkeep in vaultkeeps">
-                <p v-if="vault.id == vaultkeep.vaultId">{{vaultkeep.keepId}}</p>
-              </div> -->
-
-              <div v-for="keep in keepsinavault[vault.id]">
-                <p>{{keep.name}}</p>
+              <div class="col-12 d-flex flex-row">
+                <div v-for="keep in keepsinavault[vault.id]">
+                  <div class="card ml-2">
+                    <img class="card-img-top imgs-in-vaults" :src="keep.img" alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">{{keep.name}}</h4>
+                      <p class="card-text">
+                        {{keep.description}}
+                      </p>
+                      <i class="far fa-eye"></i><span class="ml-2">{{keep.views}}</span>
+                      <i class="fas fa-share ml-4"></i><span class="num-shares ml-2">{{keep.shares}}</span>
+                      <i class="fas fa-file-download ml-4"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -193,7 +201,7 @@
         return this.$store.state.vaultkeeps
       },
       keepsinavault() {
-        return this.$store.state.kV
+        return this.$store.state.keepsInVaults
       }
     },
     methods: {

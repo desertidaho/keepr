@@ -26,7 +26,7 @@ export default new Vuex.Store({
     search: [],
     vaults: [],
     vaultkeeps: [],
-    kV: {}
+    keepsInVaults: {}
   },
   mutations: {
     setUser(state, user) {
@@ -54,10 +54,10 @@ export default new Vuex.Store({
       state.vaultkeeps = data
     },
     getKeepsInAVault(state, { vaultId, keepArr }) {
-      Vue.set(state.kV, vaultId, keepArr)
+      Vue.set(state.keepsInVaults, vaultId, keepArr)
     },
     clearKeepsInUserVault(state, data) {
-      state.kV = data
+      state.keepsInVaults = data
     }
   },
   actions: {
