@@ -11,7 +11,8 @@
         <!-- keep cards -->
         <div class="col-12 ml-2" v-for="keep in keeps">
           <div class="card d-flex flex-row mb-3 shadow">
-            <img class="card-img-side" :src="keep.img" alt="Card image cap">
+            <img class="card-img-side" :src="keep.img" alt="Card image cap" @click="setViewKeep(keep.id)"
+              data-toggle="modal" data-target="#view-keep">
             <div class="card-body text-left">
               <h6 class="card-title">{{keep.name}} <a href="" @click="deleteKeep(keep.id)"><i
                     class="fas fa-trash text-dark trash-k shadow"></i></a> </h6>
@@ -155,6 +156,30 @@
         </div>
       </div>
     </div>
+    <!-- view keep modal -->
+    <div class="modal fade" id="view-keep" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="card-title">{{viewKeep.name}}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body mbv">
+            <p class="card-text ml-3 view-keep-desc">
+              {{viewKeep.description}}
+            </p>
+            <img class="card-img-top view-keep-img mb-2" :src="viewKeep.img" alt="Card image cap">
+          </div>
+          <div class="modal-footer mfv d-flex justify-content-around">
+            <i class="far fa-eye"></i><span class="modal-views">{{viewKeep.views + 1}}</span>
+            <i class="fas fa-share"></i><span class="modal-shares">{{viewKeep.shares}}</span>
+            <i class="fas fa-file-download ml-4"></i><span class="modal-keeps">{{viewKeep.keeps}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -283,11 +308,23 @@
         }
       },
       increaseShares(data) {
-        this.viewKeep.shares = data.shares++
+        data.shares++
         this.updateViews(data)
       },
       updateViews(keep) {
         this.$store.dispatch('updateViews', keep)
+      },
+      setViewKeep(data) {
+        if (data > 0) {
+          let keep = this.keeps.find(k => k.id == data);
+          this.viewKeep.name = keep.name
+          this.viewKeep.description = keep.description
+          this.viewKeep.img = keep.img
+          this.viewKeep.views = keep.views++
+          this.viewKeep.shares = keep.shares
+          this.viewKeep.keeps = keep.keeps
+          this.updateViews(keep)
+        }
       }
     },
     components: {
@@ -332,7 +369,9 @@
     border-bottom-left-radius: 18px;
     max-width: 60%;
     min-width: 60%;
+    min-height: 50vh;
     object-fit: cover;
+    cursor: pointer;
   }
 
   .card-text {
