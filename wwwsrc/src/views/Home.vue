@@ -16,12 +16,16 @@
                 </p>
               </a>
               <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
-              <i class="fas fa-share mt-2"></i><span class="num-shares">{{keep.shares}}</span><br>
+              <span @click="increaseShares(keep)"> <i class="fas fa-share mt-2"></i> </span><span
+                class="num-shares">{{keep.shares}}</span> <iframe class="facebook shadow"
+                src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&width=59&height=20&appId"
+                width="59" height="20" scrolling="no" frameborder="0" allowTransparency="true"
+                allow="encrypted-media"></iframe><br>
               <i class="fas fa-file-download mt-2"></i><span class="num-keeps">{{keep.keeps}}</span><br>
               <div class="text-center">
                 <div v-if="activeUser.id" class="dropdown mt-2">
-                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow" type="button"
-                    data-toggle="dropdown">Add
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow ml-2"
+                    type="button" data-toggle="dropdown">Add
                     To Vault
                     <span class="caret"></span></button>
                   <ul class="dropdown-menu">
@@ -82,7 +86,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -166,6 +169,15 @@
       getMyVaults() {
         let userId = this.activeUser.id
         this.$store.dispatch('getMyVaults', userId)
+      },
+      increaseShares(data) {
+        this.viewKeep.name = data.name
+        this.viewKeep.description = data.description
+        this.viewKeep.img = data.img
+        this.viewKeep.views = data.views
+        this.viewKeep.shares = data.shares++
+        this.viewKeep.keeps = data.keeps
+        this.updateViews(data)
       }
     },
     components: {
@@ -233,6 +245,10 @@
 
   .trash {
     margin-left: 0.1rem;
+  }
+
+  .facebook {
+    margin-left: 5.1vw;
   }
 
   .add-to-vault {

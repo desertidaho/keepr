@@ -158,9 +158,11 @@
   export default {
     name: "dashboard",
     beforeMount() {
-      this.getMyKeeps()
-      this.getMyVaults()
-      this.getMyVaultKeeps()
+      if (this.$store.state.user.id) {
+        this.getMyKeeps()
+        this.getMyVaults()
+        this.getMyVaultKeeps()
+      }
     },
     mounted() {
       if (!this.$store.state.user.id) {

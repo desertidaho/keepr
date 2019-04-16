@@ -171,7 +171,7 @@ export default new Vuex.Store({
 
     //#region -- VAULTS --
 
-    //get all private/public vaults for a user dashboard
+    //get all vaults for a user dashboard
     getMyVaults({ commit, dispatch }, userId) {
       api.get(`Vault/${userId}`, userId)
         .then(res => {
