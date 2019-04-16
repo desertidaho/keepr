@@ -9,15 +9,30 @@
         <div class="row">
             <div class="col-12 main">
                 <form v-if="loginForm" @submit.prevent="loginUser">
-                    <input type="email" v-model="creds.email" placeholder=" Email" class="shadow">
-                    <input type="password" v-model="creds.password" placeholder=" Password" class="ml-2 shadow">
-                    <button type="submit" class="btn btn-sm btn-outline-dark ml-2 shadow">Login</button>
+                    <div class="col-12">
+                        <input type="email" v-model="creds.email" placeholder=" Email" class="shadow">
+                    </div>
+                    <div class="col-12 mt-2">
+                        <input type="password" v-model="creds.password" placeholder=" Password" class="shadow">
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-sm btn-outline-dark ml-2 shadow">Login</button>
+                    </div>
                 </form>
                 <form v-else @submit.prevent="register">
-                    <input type="text" v-model="newUser.username" placeholder=" Name" class="shadow">
-                    <input type="email" v-model="newUser.email" placeholder=" Email" class="ml-2 shadow">
-                    <input type="password" v-model="newUser.password" placeholder=" Password" class="ml-2 shadow">
-                    <button type="submit" class="btn btn-sm btn-outline-dark ml-2 shadow">Create Account</button>
+                    <div class="col-12 mt-2">
+                        <input type="text" v-model="newUser.username" placeholder=" Name" class="shadow">
+                    </div>
+                    <div class="col-12 mt-2">
+                        <input type="email" v-model="newUser.email" placeholder=" Email" class="shadow">
+                    </div>
+                    <div class="col-12 mt-2">
+                        <input type="password" v-model="newUser.password" placeholder=" Password" class="shadow">
+                    </div>
+                    <div class="col-12 mt-3"> <button type="submit"
+                            class="btn btn-sm btn-outline-dark ml-2 shadow">Create Account</button>
+                    </div>
+
                 </form>
                 <div @click="loginForm = !loginForm" class="mt-3">
                     <p v-if="loginForm" class="reg text-light">No account? Click to Register.</p>
@@ -92,7 +107,7 @@
     }
 
     .main {
-        margin-top: 10vh;
+        margin-top: 7vh;
     }
 
     .reg {
@@ -101,5 +116,20 @@
 
     input {
         width: 15vw;
+    }
+
+    @media (max-width:768px) {
+        .name {
+            margin-top: 10vh;
+        }
+
+        input {
+            width: 65vw !important;
+        }
+
+        .reg {
+            font-size: 0.8rem;
+        }
+
     }
 </style>

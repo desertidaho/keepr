@@ -11,7 +11,7 @@
       </div>
       <div class="col-6 d-flex justify-content-center" v-if="!atLogin">
         <form class="form-inline" @submit.prevent="search(searchQuery)">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="searchQuery">
+          <input class="form-control mr-sm-2 search-input" type="text" placeholder="Search" v-model="searchQuery">
           <button class="btn btn-outline-warning my-2 my-sm-0 search" type="submit">Search</button>
         </form>
         <button v-if="searched.length > 0" class="btn btn-outline-warning my-2 my-sm-0 search ml-2"
@@ -19,7 +19,8 @@
           Search</button>
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="!activeUser.active && !atLogin">
-        <button class="btn btn-outline-warning my-2 my-sm-0 in" type="submit" v-if="" @click="signIn">Sign In</button>
+        <button class="btn btn-outline-warning my-2 my-sm-0 in" type="submit" v-if="" @click="signIn">Sign
+          In</button>
         <button class="btn btn-outline-warning my-2 my-sm-0 ml-2 in" type="submit" v-if=""
           @click="signIn">Register</button>
       </div>
@@ -152,5 +153,30 @@
   .out,
   .search {
     color: #ff7300;
+  }
+
+  @media (max-width:768px) {
+    .logo {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    .browse,
+    .in,
+    .out,
+    .search {
+      font-size: 0.65rem;
+    }
+
+    .search-input,
+    .search {
+      display: none;
+    }
+
+    .username {
+      margin-top: 0.45rem;
+      font-size: 0.7rem;
+    }
+
   }
 </style>
