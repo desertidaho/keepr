@@ -8,23 +8,24 @@
           <div class="card mb-3 shadow">
             <a @click="setViewKeep(keep.id)"><img data-toggle="modal" data-target="#view-keep" class="card-img-top"
                 :src="keep.img" alt="Card image cap"></a>
-            <div class="card-body text-left px-3">
+            <div class="card-body text-left pl-3 pr-2">
               <a @click="setViewKeep(keep.id)">
                 <h6 class="card-title" data-toggle="modal" data-target="#view-keep">{{keep.name}}</h6>
                 <p class="card-text mb-2" data-toggle="modal" data-target="#view-keep">
                   {{keep.description}}
                 </p>
               </a>
-              <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><br>
-              <span @click="increaseShares(keep)"> <i class="fas fa-share mt-2"></i> </span><span
-                class="num-shares">{{keep.shares}}</span> <iframe class="facebook shadow"
-                src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&width=59&height=20&appId"
-                width="59" height="20" scrolling="no" frameborder="0" allowTransparency="true"
-                allow="encrypted-media"></iframe><br>
+              <i class="far fa-eye"></i><span class="ml-3">{{keep.views}}</span><a
+                href="https://www.facebook.com/sharer/sharer.php?u=brettkeepr.herokuapp.com" target="_blank"><i
+                  @click="increaseShares(keep)" class="fab fa-facebook facebook"></i></a> <a
+                href="http://www.twitter.com/share?u=brettkeepr.herokuapp.com" target="_blank"><i
+                  @click="increaseShares(keep)" class="fab fa-twitter ml-3"></i></a>
+              <br>
+              <i class=" fas fa-share mt-2"></i><span class="num-shares">{{keep.shares}}</span> <br>
               <i class="fas fa-file-download mt-2"></i><span class="num-keeps">{{keep.keeps}}</span><br>
               <div class="text-center">
                 <div v-if="activeUser.id" class="dropdown mt-2">
-                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow ml-2"
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow ml-1"
                     type="button" data-toggle="dropdown">Add
                     To Vault
                     <span class="caret"></span></button>
@@ -73,15 +74,10 @@
                 </p>
                 <img class="card-img-top view-keep-img mb-2" :src="viewKeep.img" alt="Card image cap">
               </div>
-              <div class="modal-footer mfv d-flex justify-content-center">
-                <i class="far fa-eye"></i><span class="ml-2">{{viewKeep.views + 1}}</span>
-                <i class="fas fa-share ml-5"></i><span class="num-shares ml-2">{{viewKeep.shares}}</span>
-                <i class="fas fa-file-download ml-5"></i><span class="num-keeps ml-2">{{viewKeep.keeps}}</span>
-                <div class="py-4">
-                  <button v-if="activeUser.id" @click="addToVault(viewKeep.id)"
-                    class="btn btn-sm btn-secondary shadow add-to-vault ml-5 mb-3">Add To
-                    Vault</button>
-                </div>
+              <div class="modal-footer mfv d-flex justify-content-around">
+                <i class="far fa-eye"></i><span class="modal-views">{{viewKeep.views + 1}}</span>
+                <i class="fas fa-share"></i><span class="modal-shares">{{viewKeep.shares}}</span>
+                <i class="fas fa-file-download ml-4"></i><span class="modal-keeps">{{viewKeep.keeps}}</span>
               </div>
             </div>
           </div>
@@ -146,11 +142,6 @@
           this.viewKeep.keeps = keep.keeps
           this.updateViews(keep)
         } else {
-          this.viewKeep.name = data.name
-          this.viewKeep.description = data.description
-          this.viewKeep.img = data.img
-          this.viewKeep.views = data.views
-          this.viewKeep.shares = data.shares
           this.viewKeep.keeps = data.keeps++
           this.updateViews(data)
         }
@@ -171,13 +162,9 @@
         this.$store.dispatch('getMyVaults', userId)
       },
       increaseShares(data) {
-        this.viewKeep.name = data.name
-        this.viewKeep.description = data.description
-        this.viewKeep.img = data.img
-        this.viewKeep.views = data.views
-        this.viewKeep.shares = data.shares++
-        this.viewKeep.keeps = data.keeps
-        this.updateViews(data)
+        debugger
+        // this.viewKeep.shares = data.shares++
+        // this.updateViews(data)
       }
     },
     components: {
@@ -248,7 +235,7 @@
   }
 
   .facebook {
-    margin-left: 5.1vw;
+    margin-left: 4.5vw;
   }
 
   .add-to-vault {
@@ -279,8 +266,18 @@
     object-fit: contain;
   }
 
+  .modal-shares,
+  .modal-views,
+  .modal-keeps {
+    margin-left: -4.5rem;
+  }
+
   .modal-footer {
     background-color: #ffc400;
     border-bottom-left-radius: 18px;
+  }
+
+  .modal-dropdown {
+    font-size: 0.7rem;
   }
 </style>

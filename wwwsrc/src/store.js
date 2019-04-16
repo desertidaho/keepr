@@ -33,7 +33,7 @@ export default new Vuex.Store({
       state.user = user
     },
     addNewKeep(state, newKeep) {
-      state.keeps.unshift(newKeep)
+      state.keeps.push(newKeep)
     },
     getAllKeeps(state, data) {
       state.keeps = data

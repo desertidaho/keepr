@@ -1,10 +1,11 @@
 <template>
   <div class="dashboard">
     <navbar />
-    <div class="row mt-4">
-      <div class="col-4">
-        <div class="col-12 mt-3">
-          <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-keep">Create
+    <div class="row">
+      <div class="col-5">
+        <div class="col-12 mt-5">
+          <button class="btn btn-lg btn-outline-warning shadow-lg mb-4" data-toggle="modal"
+            data-target="#create-keep">Create
             Keep</button>
         </div>
         <!-- keep cards -->
@@ -20,8 +21,8 @@
               <p v-if="keep.isPrivate" class="card-text">Private</p>
               <p v-if="!keep.isPrivate" class="card-text">Public</p>
               <i class="far fa-eye"></i><span class="ml-2">{{keep.views}}</span>
-              <i class="fas fa-share ml-5"></i><span class="num-shares ml-2">{{keep.shares}}</span>
-              <i class="fas fa-file-download ml-5 mb-3"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
+              <i class="fas fa-share ml-4"></i><span class="num-shares ml-2">{{keep.shares}}</span>
+              <i class="fas fa-file-download ml-4 mb-3"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
               <div class="text-start">
                 <div class="dropdown mt-5 ml-5">
                   <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow" type="button"
@@ -37,9 +38,10 @@
           </div>
         </div>
       </div>
-      <div class="col-8">
-        <div class="col-12 mt-3">
-          <button class="btn btn-lg btn-outline-dark shadow mb-4" data-toggle="modal" data-target="#create-vault">Create
+      <div class="col-7">
+        <div class="col-12 mt-5">
+          <button class="btn btn-lg btn-outline-warning shadow-lg mb-4" data-toggle="modal"
+            data-target="#create-vault">Create
             Vault</button>
         </div>
         <!-- vault cards -->
@@ -63,9 +65,9 @@
                         {{keep.description}}
                       </p>
                       <div class="keep-vault-v-s-k ml-4 mb-2">
-                        <i class="far fa-eye ml-1"></i><span class="ml-1">{{keep.views}}</span>
-                        <i class="fas fa-share ml-4"></i><span class="num-shares ml-1">{{keep.shares}}</span>
-                        <i class="fas fa-file-download ml-4"></i><span class="num-keeps ml-1">{{keep.keeps}}</span>
+                        <i class="far fa-eye"></i><span class="ml-1">{{keep.views}}</span>
+                        <i class="fas fa-share ml-3"></i><span class="num-shares ml-1">{{keep.shares}}</span>
+                        <i class="fas fa-file-download ml-3"></i><span class="num-keeps ml-1">{{keep.keeps}}</span>
                       </div>
                     </div>
                   </div>
@@ -280,6 +282,10 @@
     min-height: 100vh;
   }
 
+  .btn-outline-warning {
+    color: #ff7300;
+  }
+
   .card,
   .modal-content {
     border: 4px solid white;
@@ -295,6 +301,7 @@
 
   #card-vaults {
     background-image: linear-gradient(to right, #ff7300 30%, #ffc400);
+    border-top-right-radius: 18px;
   }
 
   .cbv {
@@ -304,8 +311,8 @@
   .card-img-side {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 18px;
-    max-width: 50%;
-    min-width: 50%;
+    max-width: 60%;
+    min-width: 60%;
     object-fit: cover;
   }
 
@@ -372,11 +379,10 @@
 
   .card-keep-vault {
     max-width: 10vw;
-    /* border: 1.5px solid black; */
   }
 
   #keep-vault-body {
-    background-color: rgb(228, 226, 226);
+    background-image: linear-gradient(to bottom, rgb(235, 232, 232) 2%, white);
     border-bottom-left-radius: 19px;
   }
 
@@ -385,8 +391,8 @@
   }
 
   .img-in-vault {
-    max-height: 17vh;
-    min-height: 17vh;
+    max-height: 19vh;
+    min-height: 19vh;
     object-fit: fill;
     border-top-right-radius: 18px;
   }
