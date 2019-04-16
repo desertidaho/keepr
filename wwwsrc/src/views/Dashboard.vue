@@ -24,15 +24,19 @@
               <i class="fas fa-share ml-4"></i><span class="num-shares ml-2">{{keep.shares}}</span>
               <i class="fas fa-file-download ml-4 mb-3"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
               <div class="text-start">
-                <div class="dropdown mt-5 ml-5">
-                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow" type="button"
-                    data-toggle="dropdown">Add To Vault
-                    <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li v-for="vault in vaults"><a href="" @click="addKeepToVault(keep, vault)"
-                        class="text-dark ml-2">{{vault.name}}</a></li>
-                  </ul>
-                </div>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=brettkeepr.herokuapp.com" target="_blank"><i
+                    @click="increaseShares(keep)" class="fab fa-facebook facebook mt-2"></i></a> <a
+                  href="http://www.twitter.com/share?u=brettkeepr.herokuapp.com" target="_blank"><i
+                    @click="increaseShares(keep)" class="fab fa-twitter ml-3"></i></a>
+                <!-- <div class="dropdown mt-5 ml-5"> -->
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow ml-4" type="button"
+                  data-toggle="dropdown">Add To Vault
+                  <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li v-for="vault in vaults"><a href="" @click="addKeepToVault(keep, vault)"
+                      class="text-dark ml-2">{{vault.name}}</a></li>
+                </ul>
+                <!-- </div> -->
               </div>
             </div>
           </div>
@@ -193,6 +197,14 @@
           name: "",
           description: "",
           userId: "",
+        },
+        viewKeep: {
+          name: '',
+          description: '',
+          img: '',
+          views: '',
+          shares: '',
+          keeps: ''
         }
       };
     },
@@ -269,6 +281,13 @@
             break;
           }
         }
+      },
+      increaseShares(data) {
+        this.viewKeep.shares = data.shares++
+        this.updateViews(data)
+      },
+      updateViews(keep) {
+        this.$store.dispatch('updateViews', keep)
       }
     },
     components: {

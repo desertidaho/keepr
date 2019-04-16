@@ -162,9 +162,8 @@
         this.$store.dispatch('getMyVaults', userId)
       },
       increaseShares(data) {
-        debugger
-        // this.viewKeep.shares = data.shares++
-        // this.updateViews(data)
+        this.viewKeep.shares = data.shares++
+        this.updateViews(data)
       }
     },
     components: {
