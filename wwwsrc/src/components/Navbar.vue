@@ -174,7 +174,7 @@
     }
 
     .username {
-      margin-top: 0.45rem;
+      margin-top: 0.5rem;
       font-size: 0.7rem;
     }
 

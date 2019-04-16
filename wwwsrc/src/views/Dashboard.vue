@@ -2,48 +2,48 @@
   <div class="dashboard">
     <navbar />
     <div class="row">
-      <div class="col-5">
+      <div class="col-12 col-md-5">
         <div class="col-12 mt-5">
           <button class="btn btn-lg btn-outline-warning shadow-lg mb-4" data-toggle="modal"
             data-target="#create-keep">Create
             Keep</button>
         </div>
         <!-- keep cards -->
-        <div class="col-12 ml-2" v-for="keep in keeps">
+        <div class="col-12 ml-md-2" v-for="keep in keeps">
           <div class="card d-flex flex-row mb-3 shadow">
             <img class="card-img-side" :src="keep.img" alt="Card image cap" @click="setViewKeep(keep.id)"
               data-toggle="modal" data-target="#view-keep">
-            <div class="card-body text-left">
-              <h6 class="card-title">{{keep.name}} <a href="" @click="deleteKeep(keep.id)"><i
+            <div class="card-body text-left px-2 pl-md-4">
+              <h6 class="card-title card-keep-title">{{keep.name}} <a href="" @click="deleteKeep(keep.id)"><i
                     class="fas fa-trash text-dark trash-k shadow"></i></a> </h6>
-              <p class="card-text">
+              <p class="card-text card-keep-description">
                 {{keep.description}}
               </p>
-              <p v-if="keep.isPrivate" class="card-text">Private</p>
-              <p v-if="!keep.isPrivate" class="card-text">Public</p>
-              <i class="far fa-eye"></i><span class="ml-2">{{keep.views}}</span>
-              <i class="fas fa-share ml-4"></i><span class="num-shares ml-2">{{keep.shares}}</span>
-              <i class="fas fa-file-download ml-4 mb-3"></i><span class="num-keeps ml-2">{{keep.keeps}}</span>
+              <p v-if="keep.isPrivate" class="card-text card-keep-isPrivate">Private</p>
+              <p v-if="!keep.isPrivate" class="card-text card-keep-isPrivate">Public</p>
+              <i class="far fa-eye card-keep-icon"></i><span class="ml-1 card-keep-icon-nums">{{keep.views}}</span>
+              <i class="fas fa-share ml-3 ml-md-4 card-keep-icon"></i><span
+                class="num-shares ml-1 card-keep-icon-nums">{{keep.shares}}</span>
+              <i class="fas fa-file-download ml-3 ml-md-4 mb-3 card-keep-icon"></i><span
+                class="num-keeps ml-1 card-keep-icon-nums">{{keep.keeps}}</span>
               <div class="text-start">
                 <a href="https://www.facebook.com/sharer/sharer.php?u=brettkeepr.herokuapp.com" target="_blank"><i
                     @click="increaseShares(keep)" class="fab fa-facebook facebook mt-2"></i></a> <a
                   href="http://www.twitter.com/share?u=brettkeepr.herokuapp.com" target="_blank"><i
-                    @click="increaseShares(keep)" class="fab fa-twitter ml-3"></i></a>
-                <!-- <div class="dropdown mt-5 ml-5"> -->
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow ml-4" type="button"
+                    @click="increaseShares(keep)" class="fab fa-twitter twitter ml-3"></i></a><br>
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle add-to-vault shadow" type="button"
                   data-toggle="dropdown">Add To Vault
                   <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                   <li v-for="vault in vaults"><a href="" @click="addKeepToVault(keep, vault)"
                       class="text-dark ml-2">{{vault.name}}</a></li>
                 </ul>
-                <!-- </div> -->
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-7">
+      <div class="col-12 col-md-7">
         <div class="col-12 mt-5">
           <button class="btn btn-lg btn-outline-warning shadow-lg mb-4" data-toggle="modal"
             data-target="#create-vault">Create
@@ -51,16 +51,16 @@
         </div>
         <!-- vault cards -->
         <div class="col-12" v-for="vault in vaults">
-          <div class="card d-flex flex-row mb-3 shadow">
+          <div class="card mb-3 shadow">
             <div class="card-body text-left cbv" id="card-vaults">
               <a href="" @click="deleteVault(vault.id)"><i class="fas fa-trash text-dark mt-2 trash-v shadow"></i></a>
               <h6 class="card-title text-light">{{vault.name}}</h6>
               <p class="card-text text-light">
                 {{vault.description}}</p>
-              <div class="col-12 d-flex flex-row">
+              <div class="col-12 d-flex flex-row" id="vault-cards">
                 <!-- keep cards in vaults -->
                 <div v-for="keep in keepsinavault[vault.id]">
-                  <div class="card ml-2 card-keep-vault shadow">
+                  <div class="card ml-md-2 card-keep-vault shadow">
                     <img class="card-img-top img-in-vault" :src="keep.img" alt="Card image cap">
                     <div class="" id="keep-vault-body">
                       <h6 class="card-title ml-2 mt-2">{{keep.name}} <a href=""
@@ -457,5 +457,55 @@
 
   .keep-vault-v-s-k {
     font-size: 0.7rem;
+  }
+
+  @media (max-width:768px) {
+    .card-img-side {
+      max-width: 50%;
+      min-width: 50%;
+      min-height: 30vh;
+      object-fit: cover;
+    }
+
+    .card-keep-title {
+      font-size: 0.8rem;
+    }
+
+    .card-keep-description {
+      font-size: 0.6rem;
+    }
+
+    .card-keep-isPrivate {
+      font-size: 0.6rem;
+    }
+
+    .card-keep-icon-nums {
+      font-size: 0.7rem;
+    }
+
+    .facebook,
+    .twitter {
+      margin-left: 1vw;
+      margin-bottom: 2rem;
+    }
+
+    .add-to-vault {
+      font-size: 0.7rem;
+    }
+
+    #vault-cards {
+      display: flex;
+      flex-direction: column !important;
+    }
+
+    .card-keep-vault {
+      min-width: 70vw;
+      margin-bottom: 3vh;
+    }
+
+    .img-in-vault {
+      max-height: 30vh;
+      min-height: 30vh;
+    }
   }
 </style>

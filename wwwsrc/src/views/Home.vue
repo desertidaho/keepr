@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mt-4">
         <!-- keep cards -->
-        <div v-if="searched.length == 0" class="col-2" v-for="keep in keeps">
+        <div v-if="searched.length == 0" class="col-12 col-md-2" v-for="keep in keeps">
           <div class="card mb-3 shadow">
             <a @click="setViewKeep(keep.id)"><img data-toggle="modal" data-target="#view-keep" class="card-img-top"
                 :src="keep.img" alt="Card image cap"></a>
@@ -19,7 +19,7 @@
                 href="https://www.facebook.com/sharer/sharer.php?u=brettkeepr.herokuapp.com" target="_blank"><i
                   @click="increaseShares(keep)" class="fab fa-facebook facebook"></i></a> <a
                 href="http://www.twitter.com/share?u=brettkeepr.herokuapp.com" target="_blank"><i
-                  @click="increaseShares(keep)" class="fab fa-twitter ml-3"></i></a>
+                  @click="increaseShares(keep)" class="fab fa-twitter twitter ml-3"></i></a>
               <br>
               <i class=" fas fa-share mt-2"></i><span class="num-shares">{{keep.shares}}</span> <br>
               <i class="fas fa-file-download mt-2"></i><span class="num-keeps">{{keep.keeps}}</span><br>
@@ -278,5 +278,18 @@
 
   .modal-dropdown {
     font-size: 0.7rem;
+  }
+
+  @media (max-width:768px) {
+
+    .facebook,
+    .twitter {
+      margin-left: 38vw;
+    }
+
+    .card-img-top {
+      max-height: 14rem;
+      min-height: 14rem;
+    }
   }
 </style>
