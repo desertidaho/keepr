@@ -32,7 +32,6 @@
                     <div class="col-12 mt-3"> <button type="submit"
                             class="btn btn-sm btn-outline-dark ml-2 shadow">Create Account</button>
                     </div>
-
                 </form>
                 <div @click="loginForm = !loginForm" class="mt-3">
                     <p v-if="loginForm" class="reg text-light">No account? Click to Register.</p>
@@ -134,7 +133,5 @@
         .main {
             margin-top: 4vh;
         }
-
-
     }
 </style>

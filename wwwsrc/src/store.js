@@ -25,7 +25,7 @@ export default new Vuex.Store({
     keeps: [],
     search: [],
     vaults: [],
-    vaultkeeps: [],
+    vaultKeeps: [],
     keepsInVaults: {}
   },
   mutations: {
@@ -48,10 +48,10 @@ export default new Vuex.Store({
       state.vaults = data
     },
     addNewVaultKeeps(state, newVaultKeeps) {
-      state.vaultkeeps.unshift(newVaultKeeps)
+      state.vaultKeeps.unshift(newVaultKeeps)
     },
     getAllVaultKeeps(state, data) {
-      state.vaultkeeps = data
+      state.vaultKeeps = data
     },
     getKeepsInAVault(state, { vaultId, keepArr }) {
       Vue.set(state.keepsInVaults, vaultId, keepArr)

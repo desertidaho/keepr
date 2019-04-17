@@ -59,7 +59,7 @@
                 {{vault.description}}</p>
               <div class="col-12 d-flex flex-row" id="vault-cards">
                 <!-- keep cards in vaults -->
-                <div v-for="keep in keepsinavault[vault.id]">
+                <div v-for="keep in keepsInAVault[vault.id]">
                   <div class="card ml-md-2 card-keep-vault shadow">
                     <img class="card-img-top img-in-vault" :src="keep.img" alt="Card image cap">
                     <div class="" id="keep-vault-body">
@@ -243,10 +243,10 @@
       vaults() {
         return this.$store.state.vaults
       },
-      vaultkeeps() {
-        return this.$store.state.vaultkeeps
+      vaultKeeps() {
+        return this.$store.state.vaultKeeps
       },
-      keepsinavault() {
+      keepsInAVault() {
         return this.$store.state.keepsInVaults
       }
     },
@@ -298,7 +298,7 @@
       deleteKeepFromVault(vault, keep) {
         let vaultId = vault.id
         let keepId = keep.id
-        let vaultKeeps = this.vaultkeeps
+        let vaultKeeps = this.vaultKeeps
         for (let i = 0; i < vaultKeeps.length; i++) {
           let vk = vaultKeeps[i]
           if (vk.vaultId == vaultId && vk.keepId == keepId) {

@@ -127,7 +127,7 @@
         return this.$store.state.vaults
       },
       vaultkeeps() {
-        return this.$store.state.vaultkeeps
+        return this.$store.state.vaultKeeps
       }
     },
     methods: {
