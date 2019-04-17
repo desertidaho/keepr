@@ -144,7 +144,7 @@ export default new Vuex.Store({
         })
     },
 
-    //edit a keep by incrementing number of views or saves to vaults
+    //edit a keep by incrementing number of views, shares, or saves to vaults
     updateViews({ commit, dispatch }, editedKeep) {
       let id = editedKeep.id
       api.put(`Keep/${id}`, editedKeep)
@@ -221,7 +221,7 @@ export default new Vuex.Store({
         })
     },
 
-    //get all private/public vaults for a user dashboard
+    //get all vaults for a user dashboard
     getMyVaultKeeps({ commit, dispatch }, userId) {
       api.get(`VaultKeeps/${userId}`, userId)
         .then(res => {
@@ -233,7 +233,7 @@ export default new Vuex.Store({
         })
     },
 
-    //get all keeps for a given vault
+    //get all keeps for a given vault (table join)
     getKeepsInVault({ commit, dispatch }, vaultId) {
       api.get(`VaultKeeps/${vaultId}/keeps`)
         .then(res => {
