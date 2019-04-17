@@ -436,7 +436,7 @@
   }
 
   .card-keep-vault {
-    max-width: 11vw;
+    max-width: 10.5vw;
   }
 
   #keep-vault-body {
