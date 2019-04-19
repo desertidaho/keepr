@@ -95,6 +95,9 @@
       if (this.activeUser.id) {
         this.getMyVaults()
       }
+      if (!this.activeUser.id) {
+        this.$store.dispatch('authenticate')
+      }
     },
     mounted() {
       this.$store.dispatch('getKeeps')

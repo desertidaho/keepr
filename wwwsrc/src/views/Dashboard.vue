@@ -189,14 +189,14 @@
   export default {
     name: "dashboard",
     beforeMount() {
-      if (this.$store.state.user.id) {
+      if (this.activeUser.id) {
         this.getMyKeeps()
         this.getMyVaults()
         this.getMyVaultKeeps()
       }
     },
     mounted() {
-      if (!this.$store.state.user.id) {
+      if (!this.activeUser.id) {
         this.$router.push({ name: "login" });
       }
       let vaults = this.vaults
