@@ -109,8 +109,8 @@
                   placeholder="Image UrL...">
               </div>
               <div class="form-group text-left">
-                <input v-model="newKeep.isPrivate" class="form-check-input mt-2 text-left" type="checkbox" value=""
-                  id="isPrivate">
+                <input v-model="newKeep.isPrivate" class="form-check-input mt-2 text-left private-checkbox"
+                  type="checkbox" value="" id="isPrivate">
                 <label class="form-check-label ml-4" for="isPrivate">
                   Private (If checked only you can see.)
                 </label>
@@ -481,6 +481,10 @@
 
     .card-keep-icon-nums {
       font-size: 0.7rem;
+    }
+
+    .private-checkbox {
+      margin-left: -30vw !important;
     }
 
     .facebook,
