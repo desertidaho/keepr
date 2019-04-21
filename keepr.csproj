@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>       <!--  added trying to fix -->
+     <!-- <GenerateAssemblyInfo>false</GenerateAssemblyInfo>        added trying to fix -->
   </PropertyGroup>
 
   <ItemGroup>
