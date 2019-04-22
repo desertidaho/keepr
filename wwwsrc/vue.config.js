@@ -1,3 +1,3 @@
 module.exports = {
-  outputDir: '../bin/Release/netcoreapp2.2/wwwroot'
+  outputDir: '../bin/Release/netcoreapp2.2/publish/wwwroot'
 }
