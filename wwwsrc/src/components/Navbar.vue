@@ -25,8 +25,7 @@
           @click="signIn">Register</button>
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="!activeUser.active && !atHome">
-        <button class="btn btn-outline-warning my-2 my-sm-0 browse" @click="browse">Browse as
-          guest</button>
+        <button class="btn btn-outline-warning my-2 my-sm-0 tect-center browse" @click="browse">Browse</button>
       </div>
       <div class="col-3 d-flex justify-content-end" v-if="activeUser.active">
         <button v-if="atHome" class="btn btn-outline-warning my-2 my-sm-0 out" @click="dashboard">Dashboard</button>
@@ -153,6 +152,14 @@
   .out,
   .search {
     color: #ff7300;
+  }
+
+  .in {
+    min-width: 17vw;
+  }
+
+  .out {
+    min-width: 19vw;
   }
 
   @media (max-width:768px) {
